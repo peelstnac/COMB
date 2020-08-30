@@ -4,7 +4,7 @@ To determine which of 3 pages to load
 2 - login page
 3 - dashboard
 */
-const PAGE = require('../constants/page');
+import { PAGE } from '../constants/page';
 const defaultState = 1;
 
 const pageReducer = (state = defaultState, action) => {

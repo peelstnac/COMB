@@ -32,8 +32,8 @@ class Login extends React.Component {
                                         </div>
                                         <button className="submit-btn btn btn-primary">Login</button>
                                         <button className="submit-btn btn btn-primary">Register</button>
-                                        <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
-                                    </form>
+                                    </form> 
+                                    <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
                                 </div>
                             </div>
                         </div>

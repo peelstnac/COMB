@@ -1,4 +1,4 @@
-const PAGE = require('../constants/page');
+import { PAGE } from '../constants/page';
 
 const switchPage = (page) => {
     return({

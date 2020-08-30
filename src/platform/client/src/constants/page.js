@@ -1,2 +1,1 @@
-const PAGE = 'PAGE';
-export default PAGE;
+export const PAGE = 'PAGE';
