@@ -5,18 +5,23 @@ import landing from './components/landing';
 import login from './components/login';
 // Import actions
 import switchPage from './actions/switchPage';
+import updateAuth from './actions/updateAuth';
 
 // Redux boilerplate
 const landingMapStateToProps = (state) => {
-    let { page } = state;
+    let { page, auth } = state;
     return({
-        page: page
+        page: page,
+        auth: auth
     });
 }
 const landingMapDispatchToProps = (dispatch) => {
     return({
       switchPage: (page) => {
         dispatch(switchPage(page));
+      },
+      updateAuth: (data) => {
+          dispatch(updateAuth(data));
       }
     });
 }

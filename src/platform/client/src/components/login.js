@@ -75,7 +75,12 @@ class Login extends React.Component {
                         msg: '',
                         err: false
                     }
-                })
+                });
+                // Invoke updateAuth
+                this.props.updateAuth({
+                    isAuth: true,
+                    username: username
+                });
             } else {
                 console.log('components/login.js: data.isAuth is neither true nor false.');
             }
