@@ -82,7 +82,7 @@ router.post('/login', (req, res) => {
                             };
                             res.json({
                                 isAuth: true,
-                                msg: 'Successfully logged in.',
+                                msg: '',
                                 err: false
                             });
                         } else {

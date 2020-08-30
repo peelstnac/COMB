@@ -24,9 +24,6 @@ const Landing = connect(landingMapStateToProps, landingMapDispatchToProps)(landi
 const Login = connect(landingMapStateToProps, landingMapDispatchToProps)(login);
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         switch (this.props.page) {
             case 1:

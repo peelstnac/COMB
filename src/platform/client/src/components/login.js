@@ -3,7 +3,10 @@ import axios from 'axios';
 // Import CSS
 import './shared.css';
 import './login.css';
+// Import components
+import NotAuthCard from './notAuthCard';
 
+// Configure HTTP vs HTTPS
 var method;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
@@ -16,7 +19,11 @@ class Login extends React.Component {
         super(props);
         this.state = {
             formUsername: '',
-            formPassword: ''
+            formPassword: '',
+            notAuthCardState: {
+                msg: '',
+                err: false
+            }
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -47,11 +54,32 @@ class Login extends React.Component {
             formUsername: '',
             formPassword: ''
         });
-        axios.get(method + 'localhost:4000/auth/test').then((res) => {
-            console.log('RESPONSE');
-            console.log(res);
+        axios.post(method + 'localhost:4000/auth/login', {
+            username: username,
+            password: password
+        }).then((res) => {
+            var { data } = res;
+            if (data.isAuth === false) {
+                this.setState({
+                    // Auth failed
+                    notAuthCardState: {
+                        msg: data.msg,
+                        err: data.err
+                    } 
+                });
+            } 
+            else if (data.isAuth === true) {
+                // Auth succeeded
+                this.setState({
+                    notAuthCardState: {
+                        msg: '',
+                        err: false
+                    }
+                })
+            } else {
+                console.log('components/login.js: data.isAuth is neither true nor false.');
+            }
         });
-        console.log(process.env.NODE_ENV);
     }
     handleRegister() {
 
@@ -78,6 +106,7 @@ class Login extends React.Component {
                                     <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
                                 </div>
                             </div>
+                            <NotAuthCard notAuthCardState={this.state.notAuthCardState}/>
                         </div>
                         <div className="col-md-4"></div>
                     </div>
