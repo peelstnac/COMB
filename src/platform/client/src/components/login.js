@@ -81,6 +81,8 @@ class Login extends React.Component {
                     isAuth: true,
                     username: username
                 });
+                // Switch page to dashboard
+                this.props.switchPage(3);
             } else {
                 console.log('components/login.js: data.isAuth is neither true nor false.');
             }

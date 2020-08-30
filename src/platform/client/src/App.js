@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // Import components
 import landing from './components/landing';
 import login from './components/login';
+import Dashboard from './components/dashboard';
 // Import actions
 import switchPage from './actions/switchPage';
 import updateAuth from './actions/updateAuth';
@@ -38,6 +39,10 @@ class App extends React.Component {
             case 2:
                 return (
                     <Login />
+                );
+            case 3:
+                return (
+                    <Dashboard />
                 );
             default:
                 return(
