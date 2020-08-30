@@ -6,6 +6,11 @@ import './login.css';
 class Login extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    // Switch page to landing
+    handleClick() {
+        this.props.switchPage(1);
     }
     render() {
         return (
@@ -18,16 +23,16 @@ class Login extends React.Component {
                                 <div className="card-body">
                                     <form>
                                         <div className="form-group">
-                                            <label for="username">Email address</label>
+                                            <label htmlFor="username">Email address</label>
                                             <input type="text" className="form-control" id="username" placeholder="Enter username..." />
                                         </div>
                                         <div className="form-group">
-                                            <label for="password">Password</label>
+                                            <label htmlFor="password">Password</label>
                                             <input type="password" className="form-control" id="password" placeholder="Enter password..." />
                                         </div>
                                         <button className="submit-btn btn btn-primary">Login</button>
                                         <button className="submit-btn btn btn-primary">Register</button>
-                                        <button className="back-btn btn btn-primary">Go back</button>
+                                        <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
                                     </form>
                                 </div>
                             </div>

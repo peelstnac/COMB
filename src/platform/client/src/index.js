@@ -6,9 +6,6 @@ import { Provider, connect } from 'react-redux'
 // Import components
 import app from './App';
 
-// Import actions
-import switchPage from './actions/switchPage';
-
 // Redux boilerplate
 const appMapStateToProps = (state) => {
   const { page } = state;
@@ -17,10 +14,8 @@ const appMapStateToProps = (state) => {
   });
 }
 const appMapDispatchToProps = (dispatch) => {
-  return({
-    switchPage: (page) => {
-      dispatch(switchPage(page));
-    }
+  return ({
+
   });
 }
 const App = connect(appMapStateToProps, appMapDispatchToProps)(app);
