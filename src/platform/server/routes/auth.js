@@ -99,6 +99,57 @@ router.post('/login', (req, res) => {
     }
 });
 
+router.post('/register', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    // Check if username is unique
+    loginModel.find({
+        username: username
+    }, (err, docs) => {
+        if (docs.length === 0 && password.length > 0) {
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    console.log(err);
+                    res.json({
+                        success: false,
+                        msg: 'A server-side error occured.',
+                        err: err
+                    });
+                } else {
+                    // Save account to database
+                    // Generate a connectionCode
+                    let connectionCode = 10000000 + Math.floor(Math.random() * 90000000);
+                    loginModel.create({
+                        connectionCode: connectionCode,
+                        username: username,
+                        password: hash
+                    }, (err, doc) => {
+                        if (err) {
+                            console.log(err);
+                            res.json({
+                                success: false,
+                                msg: 'A server-side error occured.',
+                                err: err
+                            });
+                        } else {
+                            res.json({
+                                success: true,
+                                msg: '',
+                                err: false
+                            });
+                        }
+                    });
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: 'Either username is already taken or password is <1 character long'
+            });
+        }
+    });
+});
+
 // Databse test
 router.get('/test', (req, res) => {
     loginModel.find({username: 'test'}, (err, docs) => {
