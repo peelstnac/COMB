@@ -59,7 +59,9 @@ router.post('/login', (req, res) => {
             // Compare password and hash
             bcrypt.compare(password, docs[0].password, (err, result) => {
                 if (result === true) {
+                    req.session.usr = username; // New patch
                     req.session.username = true;
+                    
                     res.json({
                         isAuth: true,
                         msg: '',
