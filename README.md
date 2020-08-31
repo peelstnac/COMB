@@ -4,6 +4,17 @@
 ## What is COMB?
 COMB allows packet sniffers on remote systems to upload their data to a central platform where users can analyze the aggregated data with a sleek GUI (output console, graphs, graphics, etc).
 
+## Building
+```
+chmod u+x build.sh
+./build.sh
+```
+To execute,
+```
+cd build
+sudo ./packet-sniffer
+```
+
 ## Development
 File structure
 ```
