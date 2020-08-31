@@ -1,12 +1,3 @@
-# COMB
-> Packet sniffing made easy.
-
-## What is COMB?
-COMB allows packet sniffers on remote systems to upload their data to a central platform where users can analyze the aggregated data with a sleek GUI (output console, graphs, graphics, etc).
-
-## Development
-File structure
-```
 .
 ├── README.md
 ├── src
@@ -67,11 +58,5 @@ File structure
     ├── landing.css
     ├── landing.html
     └── Landing Page (Adobe XD).xd
-```
 
-## Testing
-test username: test
-test password: sguhjoepf
-
-test username: test1
-test password: sguhjoepf
+18 directories, 41 files
