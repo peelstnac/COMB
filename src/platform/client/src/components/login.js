@@ -5,7 +5,7 @@ import './shared.css';
 import './login.css';
 // Import components
 import NotAuthCard from './notAuthCard';
-
+import RegisterStatusCard from './registerStatusCard';
 // Configure HTTP vs HTTPS
 var method;
 if (process.env.NODE_ENV === 'development') {
@@ -21,6 +21,11 @@ class Login extends React.Component {
             formUsername: '',
             formPassword: '',
             notAuthCardState: {
+                msg: '',
+                err: false
+            },
+            registerStatusCardState: {
+                success: false,
                 msg: '',
                 err: false
             }
@@ -47,6 +52,7 @@ class Login extends React.Component {
         });
     }
     // Handle auth buttons
+    // TODO: handle promise rejection
     handleLogin() {
         let username = this.state.formUsername;
         let password = this.state.formPassword;
@@ -89,7 +95,45 @@ class Login extends React.Component {
         });
     }
     handleRegister() {
-
+        let username = this.state.formUsername;
+        let password = this.state.formPassword;
+        this.setState({
+            formUsername: '',
+            formPassword: ''
+        });
+        axios.post(method + 'localhost:4000/auth/register', {
+            username: username,
+            password: password
+        }).then((res) => {
+            var { data } = res;
+            if (data.success === true) {
+                this.setState({
+                    registerStatusCardState: {
+                        success: true,
+                        msg: '',
+                        err: false
+                    }
+                });
+            } else {
+                if (data.err) {
+                    this.setState({
+                        registerStatusCardState: {
+                            success: false,
+                            msg: data.msg,
+                            err: data.err
+                        }
+                    });
+                } else {
+                    this.setState({
+                        registerStatusCardState: {
+                            success: false,
+                            msg: data.msg,
+                            err: data.err
+                        }
+                    });
+                }
+            }
+        });
     }
     render() {
         return (
@@ -109,11 +153,12 @@ class Login extends React.Component {
                                         <input onChange={this.handlePasswordChange} value={this.state.formPassword} type="password" className="form-control" id="password" placeholder="Enter password..." />
                                     </div>
                                     <button onClick={this.handleLogin} className="submit-btn btn btn-primary">Login</button>
-                                    <button className="submit-btn btn btn-primary">Register</button>
+                                    <button onClick={this.handleRegister} className="submit-btn btn btn-primary">Register</button>
                                     <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
                                 </div>
                             </div>
                             <NotAuthCard notAuthCardState={this.state.notAuthCardState}/>
+                            <RegisterStatusCard registerStatusCardState={this.state.registerStatusCardState} />
                         </div>
                         <div className="col-md-4"></div>
                     </div>

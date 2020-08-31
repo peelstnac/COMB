@@ -60,6 +60,7 @@ router.post('/login', (req, res) => {
                 loginModel.find({
                     username: username
                 }, (err, docs) => {
+                    console.log(docs);
                     if (err) {
                         console.log(err);
                         res.json({
