@@ -1,6 +1,11 @@
 'use strict';
+var origin;
 if (process.env.NODE_ENV === 'development') {
     require('dotenv').config();
+    origin = 'http://localhost:3000'
+}
+if (process.env.node_ENV === 'production') {
+    origin = 'https://localhost:5000' // TODO: configure AWS Lightsail
 }
 const express = require('express');
 const app = express();
@@ -15,7 +20,10 @@ const auth = require('./routes/auth');
 app.set('trust proxy', 1)
 
 // Mount middleware
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: origin
+}));
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true

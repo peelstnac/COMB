@@ -3,7 +3,7 @@ import React from 'react';
 class RegisterStatusCard extends React.Component {
     render() {
         var state = this.props.registerStatusCardState;
-        if (state.msg.length === 0) {
+        if (state.success === false && state.msg.length === 0) {
             return(
                 <></>
             );

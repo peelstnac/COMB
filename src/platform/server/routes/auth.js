@@ -39,65 +39,43 @@ router.post('/login', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     // Check if the user is already logged in
-    if (sess.username) {
-        res.json({
-            isAuth: true,
-            msg: 'You are already logged in.',
-            err: false
-        });
-    } else {
-        // Try to log the user in
-        bcrypt.hash(password, 10, (err, hash) => {
-            if (err) {
-                console.log(err);
-                res.json({
-                    isAuth: false,
-                    msg: 'Server side error when attempting to log in.',
-                    err: err
-                });
-            } else {
-                // Compare credentials with that stored in the database
-                loginModel.find({
-                    username: username
-                }, (err, docs) => {
-                    console.log(docs);
-                    if (err) {
-                        console.log(err);
-                        res.json({
-                            isAuth: false,
-                            msg: 'Server side error when attempting to log in.',
-                            err: err
-                        });
-                    } else {
-                        if (docs.length === 0) {
-                            res.json({
-                                isAuth: false,
-                                msg: 'There are no users with that username.',
-                                err: false
-                            });
-                        } 
-                        else if (docs[0].password === hash) {
-                            // Successfully logged in
-                            req.session.username = {
-                                isAuth: true,
-                            };
-                            res.json({
-                                isAuth: true,
-                                msg: '',
-                                err: false
-                            });
-                        } else {
-                            res.json({
-                                isAuth: false,
-                                msg: 'Wrong password inputted.',
-                                err: false
-                            });
-                        }
-                    }
-                });
-            }
-        });
-    }
+    // Try to log the user in
+    loginModel.find({username: username}, (err, docs) => {
+        if (err) {
+            console.log(err);
+            res.json({
+                isAuth: false,
+                msg: 'Failed to login due to server error',
+                err: err
+            });
+        }
+        else if (docs.length === 0) {
+            res.json({
+                isAuth: false,
+                msg: 'Wrong username or password.',
+                err: false
+            });
+        } else {
+            // Compare password and hash
+            bcrypt.compare(password, docs[0].password, (err, result) => {
+                if (result === true) {
+                    req.session.username = true;
+                    res.json({
+                        isAuth: true,
+                        msg: '',
+                        err: false
+                    });
+                    
+                } else {
+                    res.json({
+                        isAuth: false,
+                        msg: 'Wrong username or password.',
+                        err: err
+                    });
+                }
+            });
+        }
+    });
 });
 
 router.post('/register', (req, res) => {
@@ -151,18 +129,18 @@ router.post('/register', (req, res) => {
     });
 });
 
-// Databse test
-router.get('/test', (req, res) => {
-    loginModel.find({username: 'test'}, (err, docs) => {
-        if (err) {
-            console.log(err);
-            res.json({
-                err: err
-            });
-        } else {
-            res.json(docs);
-        }
-    })
+// Session test
+router.get('/test1', (req, res) => {
+    req.session.test = 1;
+    res.send('Hi');
+});
+router.get('/test2', (req, res) => {
+    console.log(req.session);
+    res.send('Hi 2');
+});
+router.get('/test3', (req, res) => {
+    req.session.destroy();
+    res.send('Hi 3');
 });
 
 module.exports = router;

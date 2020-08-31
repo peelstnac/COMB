@@ -7,3 +7,6 @@ COMB allows packet sniffers on remote systems to upload their data to a central 
 ## Testing
 test username: test
 test password: sguhjoepf
+
+test username: test1
+test password: sguhjoepf

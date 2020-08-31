@@ -31,10 +31,20 @@ class Login extends React.Component {
             }
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleClicke = this.handleClicke.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+    }
+    handleClicke() {
+        console.log(100);
+        axios.get(method + 'localhost:4000/auth/test1', { withCredentials: true }).then((res) => {
+            console.log(res);
+            axios.get(method + 'localhost:4000/auth/test2', { withCredentials: true }).then((res) => {
+                console.log(res);
+            });
+        });
     }
     // Switch page to landing
     handleClick() {
@@ -63,7 +73,7 @@ class Login extends React.Component {
         axios.post(method + 'localhost:4000/auth/login', {
             username: username,
             password: password
-        }).then((res) => {
+        }, { withCredentials: true }).then((res) => {
             var { data } = res;
             if (data.isAuth === false) {
                 this.setState({
@@ -104,7 +114,7 @@ class Login extends React.Component {
         axios.post(method + 'localhost:4000/auth/register', {
             username: username,
             password: password
-        }).then((res) => {
+        }, { withCredentials: true }).then((res) => {
             var { data } = res;
             if (data.success === true) {
                 this.setState({
@@ -154,7 +164,7 @@ class Login extends React.Component {
                                     </div>
                                     <button onClick={this.handleLogin} className="submit-btn btn btn-primary">Login</button>
                                     <button onClick={this.handleRegister} className="submit-btn btn btn-primary">Register</button>
-                                    <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
+                                    <button onClick={this.handleClicke} className="back-btn btn btn-primary">Go back</button>
                                 </div>
                             </div>
                             <NotAuthCard notAuthCardState={this.state.notAuthCardState}/>
