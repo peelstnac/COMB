@@ -4,10 +4,11 @@
 #include <netinet/ip.h> /* superset of previous */
 #include <arpa/inet.h>
 
-void handle_ip(char* store, char* buf, int r_len) {
+void handle_ip(char *store, char *buf, int r_len)
+{
     // Struct reference https://stackoverflow.com/questions/42840636/difference-between-struct-ip-and-struct-iphdr
 
-    struct ip* iph_ptr = (struct ip*)(buf + sizeof(struct ethhdr));
+    struct ip *iph_ptr = (struct ip *)(buf + sizeof(struct ethhdr));
 
     char dest_4[INET_ADDRSTRLEN];
     char dest_6[INET6_ADDRSTRLEN];
@@ -18,23 +19,23 @@ void handle_ip(char* store, char* buf, int r_len) {
     inet_ntop(AF_INET, &(iph_ptr->ip_src), src_4, INET_ADDRSTRLEN);
     // inet_ntop(AF_INET6, &(iph_ptr->ip_src), src_6, INET6_ADDRSTRLEN);
 
-    #ifdef NDEBUG
-        printf("IP Header--------------------------------------\n");
-        printf("Header Length: %d\n", iph_ptr->ip_hl);
-        printf("IP Version: %d\n", iph_ptr->ip_v);
-        printf("Destination: %s\n", dest_4);
-        // printf("Destination IPv6: %s\n", dest_6);
-        printf("Source: %s\n", src_4);
-        // printf("Source IPv6: %s\n", src_6);
-        printf("Type of Service: %d\n", iph_ptr->ip_tos);
-        printf("Total Length: %d\n", ntohs(iph_ptr->ip_len));
-        printf("Identification: %d\n", ntohs(iph_ptr->ip_id));
-        printf("Time to Live: %d\n", iph_ptr->ip_ttl);
-        printf("Protocol: %d\n", iph_ptr->ip_p);
-        printf("Checksum: %d\n", iph_ptr->ip_sum);
-    #endif
+#ifdef NDEBUG
+    printf("IP Header--------------------------------------\n");
+    printf("Header Length: %d\n", iph_ptr->ip_hl);
+    printf("IP Version: %d\n", iph_ptr->ip_v);
+    printf("Destination: %s\n", dest_4);
+    // printf("Destination IPv6: %s\n", dest_6);
+    printf("Source: %s\n", src_4);
+    // printf("Source IPv6: %s\n", src_6);
+    printf("Type of Service: %d\n", iph_ptr->ip_tos);
+    printf("Total Length: %d\n", ntohs(iph_ptr->ip_len));
+    printf("Identification: %d\n", ntohs(iph_ptr->ip_id));
+    printf("Time to Live: %d\n", iph_ptr->ip_ttl);
+    printf("Protocol: %d\n", iph_ptr->ip_p);
+    printf("Checksum: %d\n", iph_ptr->ip_sum);
+#endif
     // Write to store
-    char* ptr = store;
+    char *ptr = store;
     ptr += strlen(store);
     ptr += sprintf(ptr, "1\n");
     ptr += sprintf(ptr, "1.1 %d\n", iph_ptr->ip_hl);
