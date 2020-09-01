@@ -5,10 +5,11 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netinet/ip.h> /* superset of previous */
+#include <netinet/ip.h>
 #include <netinet/tcp.h>
-#include <net/ethernet.h> /* the L2 protocols */
+#include <net/ethernet.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 // TODO add asserts and unit tests
 // User defined header files
 #include "start.h"
@@ -17,6 +18,7 @@
 #include "handle_ip.h"
 #include "handle_tcp.h"
 #include "update.h"
+
 // Enable booleans
 typedef enum
 {
@@ -114,7 +116,9 @@ int main(int argc, char *argv[])
         update_count++;
         if (update_count >= max_count)
         {
-            update(store);
+            // Create a thread
+            pthread_t thread;
+            pthread_create(&thread, NULL, update, (void *)store);
             update_count = 0;
         }
     }
