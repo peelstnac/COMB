@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
     struct sockaddr from;
     socklen_t fromlen = sizeof(from);
     // Protocol handler array
-    void (*handler[1<<8])(char* store, int);
+    void (*handler[1<<8])(char*, char*, int);
     // Keep listening until flag is triggered
     for (;;) {
         if (flag) {
@@ -91,9 +91,11 @@ int main(int argc, char* argv[]) {
         }
 
         // Start handing
-        handle_ethhdr(store, r_len);
-        handle_ip(store, r_len);
-        handler[ip_proto](store, r_len);
+        handle_ethhdr(store, buf, r_len);
+
+        handle_ip(store, buf, r_len);
+
+        handler[ip_proto](store, buf, r_len);
     }
     return 0;
 }

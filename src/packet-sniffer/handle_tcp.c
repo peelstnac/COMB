@@ -1,5 +1,5 @@
 #include <stdio.h>
 
-void handle_tcp(char* store, int r_len) {
-    printf("1\n");
+void handle_tcp(char* store, char* buf, int r_len) {
+
 }

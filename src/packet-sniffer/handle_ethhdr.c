@@ -1,3 +1,3 @@
-void handle_ethhdr(char* store, int r_len) {
-    
+void handle_ethhdr(char* store, char* buf, int r_len) {
+
 }
