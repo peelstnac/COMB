@@ -16,13 +16,19 @@
 #include "handle_ethhdr.h"
 #include "handle_ip.h"
 #include "handle_tcp.h"
+#include "update.h"
 // Enable booleans
 typedef enum {false, true} bool;
 
 // Define counters
 static int update_count = 0;
 // Once count reaches max_count, the store will be cleared
-static int max_count = 50;
+
+#ifndef NDEBUG
+    static int max_count = 10;
+#else
+    static int max_count = 50;
+#endif
 
 int main(int argc, char* argv[]) {
     // Define the connection code
@@ -83,19 +89,22 @@ int main(int argc, char* argv[]) {
         handler[6] = handle_tcp;
 
         if (handler[ip_proto] == NULL) {
-            // Print unhandled warning if debug mode
             #ifndef NDEBUG
-                printf("\n\nUnhandled IP Protocol Number: %d\n\n", ip_proto);
+                // printf("\n\nUnhandled IP Protocol Number: %d\n\n", ip_proto);
             #endif
             continue;
         }
 
         // Start handing
         handle_ethhdr(store, buf, r_len);
-
         handle_ip(store, buf, r_len);
-
         handler[ip_proto](store, buf, r_len);
+        // Update condition
+        update_count++;
+        if (update_count >= max_count) {
+            update(store);
+            update_count = 0;
+        }
     }
     return 0;
 }
