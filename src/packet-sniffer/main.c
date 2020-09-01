@@ -111,7 +111,15 @@ int main(int argc, char *argv[])
         }
 
         // Start handing
+        // Check for localhost loop when in development
+#ifndef NODEBUG
+        if (handle_ethhdr(store, buf, r_len) == 2)
+        {
+            continue;
+        }
+#else
         handle_ethhdr(store, buf, r_len);
+#endif
         handle_ip(store, buf, r_len);
         handler[ip_proto](store, buf, r_len);
         // Update condition
