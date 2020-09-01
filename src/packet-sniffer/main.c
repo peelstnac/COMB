@@ -36,10 +36,12 @@ static int max_count = 10;
 static int max_count = 50;
 #endif
 
+// Define the connection code
+int c_code;
+
 int main(int argc, char *argv[])
 {
-    // Define the connection code
-    int c_code;
+
     start(&c_code);
     // Initialize store buffer
     char *store = malloc(50000);
