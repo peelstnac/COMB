@@ -36,6 +36,8 @@ static int max_count = 10;
 static int max_count = 50;
 #endif
 
+// Pointer to error log
+FILE *fp_err;
 // Define the connection code
 int c_code;
 
@@ -46,7 +48,6 @@ int main(int argc, char *argv[])
     // Initialize store buffer
     char *store = malloc(50000);
     // Create a new file called error_log.txt
-    FILE *fp_err;
     new_file(&fp_err, "build/error_log.txt");
     // Start sniffing with a raw_socket
     int sock_raw;

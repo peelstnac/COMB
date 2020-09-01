@@ -6,27 +6,33 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include "main.h"
+#include "helper_functions.h"
 
 // TCP connection
 void update_send(char *cpy)
 {
-    // TODO rework the error handling
+    printf("%d", c_code);
     int sockfd;
     struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    if (getaddrinfo("localhost", "6000", &hints, &res) != 0)
+    int gret, cret;
+    if ((gret = getaddrinfo("localhost", "6000", &hints, &res)) != 0)
     {
-        perror("getaddrinfo failed");
+        fprintf(fp_err, "update.c: getaddrinfo() failed, returned %d\n", gret);
+        handle_err();
     }
     if ((sockfd = socket(res->ai_family, res->ai_socktype, 0)) < 0)
     {
-        perror("Failed to initialize socket");
+        fprintf(fp_err, "update.c: socket() failed, returned %d\n", sockfd);
+        handle_err();
     }
-    if (connect(sockfd, res->ai_addr, res->ai_addrlen) != 0)
+    if ((cret = connect(sockfd, res->ai_addr, res->ai_addrlen)) != 0)
     {
-        perror("Failed to connect.");
+        fprintf(fp_err, "update.c: connect() failed, returned %d\n", cret);
+        handle_err();
     }
     // Send the data
     write(sockfd, cpy, 50000);
