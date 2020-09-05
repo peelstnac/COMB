@@ -4,11 +4,19 @@ const net = require('net');
 var arr = [];
 // Start a TCP server
 //
-const start = () => {
+const start = (io) => {
     const server = net.createServer(socket => {
-        console.log('Client connection');
         socket.on('data', (data) => {
-            console.log(data.toString());
+            var str = data.toString();
+            let connectionCode = Number(str.split(/\r?\n/)[0]);
+            // TODO maybe use a map instead of an array so we can get rid of the O(n)
+            for (let i = arr.length - 1; i >= 0; i--) {
+                if (arr[i].connectionCode === connectionCode) {
+                    // FIX: each socket is assigned its own room with name connectionCode
+                    io.to(connectionCode.toString()).emit('console', str);
+                    break;
+                }
+            }
         });
         socket.on('end', () => {
     

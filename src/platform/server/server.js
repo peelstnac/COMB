@@ -52,7 +52,7 @@ app.use('/dashboard', dashboard);
     }
     console.log('server.js: connected to MongoDB.')
     // Start the TCP server
-    tcpServer.start();
+    tcpServer.start(io);
     // Listen on PORT
     http.listen(process.env.PORT, () => {
         console.log(`server.js: listening on PORT ${process.env.PORT}.`);
@@ -71,7 +71,10 @@ io.on('connection', (socket) => {
                 if (arr[i].secret === secret) {
                     flag = true;
                     // Add the socket to the array
-                    arr.socket = socket;
+                    // arr.socket = socket; THIS PART DOES NOT WORK, FIX BELOW
+
+                    // FIX: every socket joins their own room
+                    socket.join(arr[i].connectionCode.toString());
                     break;
                 }
             }
