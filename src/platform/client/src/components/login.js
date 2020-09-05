@@ -71,9 +71,9 @@ class Login extends React.Component {
                     notAuthCardState: {
                         msg: data.msg,
                         err: data.err
-                    } 
+                    }
                 });
-            } 
+            }
             else if (data.isAuth === true) {
                 // Auth succeeded
                 this.setState({
@@ -157,7 +157,7 @@ class Login extends React.Component {
                                     <button onClick={this.handleClick} className="back-btn btn btn-primary">Go back</button>
                                 </div>
                             </div>
-                            <NotAuthCard notAuthCardState={this.state.notAuthCardState}/>
+                            <NotAuthCard notAuthCardState={this.state.notAuthCardState} />
                             <RegisterStatusCard registerStatusCardState={this.state.registerStatusCardState} />
                         </div>
                         <div className="col-md-4"></div>

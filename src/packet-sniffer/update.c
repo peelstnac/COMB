@@ -34,7 +34,7 @@ void update_send(char *cpy)
     if ((cret = connect(sockfd, res->ai_addr, res->ai_addrlen)) != 0)
     {
         fprintf(fp_err, "update.c: connect() failed, returned %d\n", cret);
-        fflush();
+        fflush(); 
         handle_err();
     }
     // Send the data

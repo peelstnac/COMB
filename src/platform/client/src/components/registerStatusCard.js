@@ -4,12 +4,12 @@ class RegisterStatusCard extends React.Component {
     render() {
         var state = this.props.registerStatusCardState;
         if (state.success === false && state.msg.length === 0) {
-            return(
+            return (
                 <></>
             );
         }
         else if (state.success === true) {
-            return(
+            return (
                 <>
                     <div className="alert alert-success" role="alert">
                         Successfully registered account. Please log in.
@@ -20,7 +20,7 @@ class RegisterStatusCard extends React.Component {
             if (state.err) {
                 console.log(state.err);
             }
-            return(
+            return (
                 <>
                     <div className="alert alert-danger" role="alert">
                         Failed to register account. Reason: {state.msg}.
