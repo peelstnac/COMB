@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const URL = require('./constants/URL');
 // Import routes
 const auth = require('./routes/auth');
-
+const dashboard = require('./routes/dashboard');
 // trust first proxy
 app.set('trust proxy', 1)
 
@@ -31,6 +31,7 @@ app.use(express.urlencoded({
 
 // Set up routes
 app.use('/auth', auth);
+app.use('/dashboard', dashboard);
 
 // Set up connection to MongoDB
 (async () => {

@@ -4,10 +4,13 @@ const router = express.Router();
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bcrypt = require('bcrypt');
+const randomstring = require('randomstring');
 // Import models
 const loginModel = require('../models/login');
+const secretModel = require('../models/secret');
 // MongoDB connection URL
 const URL = require('../constants/URL');
+const { connection } = require('mongoose');
 
 // Mount the middleware
 router.use(session({
@@ -23,7 +26,7 @@ router.use(session({
 router.get('/isAuth/:username', (req, res) => {
     let sess = req.session;
     let username = req.params.username;
-    if (sess.username) {
+    if (sess[username]) {
         res.json({
             isAuth: true
         });
@@ -60,7 +63,8 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, docs[0].password, (err, result) => {
                 if (result === true) {
                     req.session.usr = username; // New patch
-                    req.session.username = true;
+                    req.session.isAuth = true;
+                    req.session[username] = true;
                     
                     res.json({
                         isAuth: true,
@@ -129,6 +133,43 @@ router.post('/register', (req, res) => {
             });
         }
     });
+});
+
+router.get('/socket', (req, res) => {
+    let sess = req.session;
+    if (sess.isAuth) {
+        // Generate random secret
+        let secret = randomstring.generate();
+        // Get the connectionCode from the DB
+        loginModel.find({
+            username: sess.usr
+        }, (err, docs) => {
+            if (err) {
+                console.log(err);
+                res.json({
+                    secret: '',
+                    err: err
+                });
+            }
+            if (docs.length === 0) {
+                res.json({
+                    secret: '',
+                    err: 'database error'
+                });
+            }
+            let connectionCode = docs[0].connectionCode;
+            res.json({
+                secret: secret,
+                err: false,
+                connectionCode: connectionCode
+            });
+        });
+    } else {
+        res.json({
+            secret: '',
+            err: false
+        });
+    }
 });
 
 // Session test
