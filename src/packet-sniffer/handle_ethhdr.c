@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <net/ethernet.h> /* the L2 protocols */
+#include "main.h"
 
 int handle_ethhdr(char *store, char *buf, int r_len)
 {
@@ -29,6 +30,7 @@ int handle_ethhdr(char *store, char *buf, int r_len)
     // Write to store
     char *ptr = store;
     ptr += strlen(store);
+    ptr += sprintf(ptr, "%d\n", c_code);
     ptr += sprintf(ptr, "0\n");
     ptr += sprintf(ptr, "0.1 %.2X-%.2X-%.2X-%.2X-%.2X-%.2X\n", ethh_ptr->h_dest[0], ethh_ptr->h_dest[1],
                    ethh_ptr->h_dest[2], ethh_ptr->h_dest[3], ethh_ptr->h_dest[4], ethh_ptr->h_dest[5]);
