@@ -5,9 +5,9 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bcrypt = require('bcrypt');
 const randomstring = require('randomstring');
+const tcpServer = require('../tcpServer');
 // Import models
 const loginModel = require('../models/login');
-const secretModel = require('../models/secret');
 // MongoDB connection URL
 const URL = require('../constants/URL');
 const { connection } = require('mongoose');
@@ -158,6 +158,12 @@ router.get('/socket', (req, res) => {
                 });
             }
             let connectionCode = docs[0].connectionCode;
+            var { arr } = tcpServer;
+            arr.push({
+                secret: secret,
+                connectionCode: connectionCode,
+                socket: null
+            });
             res.json({
                 secret: secret,
                 err: false,
