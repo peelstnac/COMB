@@ -159,6 +159,7 @@ router.get('/socket', (req, res) => {
             }
             let connectionCode = docs[0].connectionCode;
             var { arr } = tcpServer;
+            // Push information so the TCP server can access it
             arr.push({
                 secret: secret,
                 connectionCode: connectionCode,

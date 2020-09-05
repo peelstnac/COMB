@@ -1,7 +1,7 @@
 // THIS IS A TEMP FILE FOR TESTING, CHANGE LATER
 import React from 'react';
 import axios from 'axios';
-
+import io from 'socket.io-client';
 var method;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
@@ -16,7 +16,11 @@ class Dashboard extends React.Component {
     componentDidMount() {
         axios.get(method + 'localhost:4000/auth/socket', { withCredentials: true }).then((res) => {
             var { data } = res;
-            console.log(data);
+            if (data.secret.length > 0) {
+                const socket = io(method + 'localhost:4000');
+                // Send the secret over
+                socket.emit('secret', data.secret);
+            }
         });
     }
     render() {

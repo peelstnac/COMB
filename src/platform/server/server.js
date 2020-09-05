@@ -9,6 +9,9 @@ if (process.env.node_ENV === 'production') {
 }
 const express = require('express');
 const app = express();
+const http = require('http').createServer(app);
+const tcpServer = require('./tcpServer');
+const io = require('socket.io')(http);
 const cors = require('cors');
 const mongoose = require('mongoose');
 // MongoDB connection URL
@@ -49,10 +52,31 @@ app.use('/dashboard', dashboard);
     }
     console.log('server.js: connected to MongoDB.')
     // Listen on PORT
-    app.listen(process.env.PORT, () => {
+    http.listen(process.env.PORT, () => {
         console.log(`server.js: listening on PORT ${process.env.PORT}.`);
     });
 })();
+
+// Implement SocketIO handling here
+io.on('connection', (socket) => {
+    let secret;
+    socket.on('secret', (data) => {
+        secret = data;
+            let { arr } = tcpServer;
+            // Find the secret in the array
+            var flag = false;
+            for (let i = arr.length - 1; i >= 0; i--) {
+                if (arr[i].secret === secret) {
+                    flag = true;
+                    // Add the socket to the array
+                    arr.socket = socket;
+                    break;
+                }
+            }
+            // TODO handle flag === false
+    });
+    // TODO handle disconnect
+});
 
 [`SIGINT`, `SIGUSR1`, `SIGUSR2`, `uncaughtException`, `SIGTERM`].forEach((eventType) => {
     process.on(eventType, () => {
