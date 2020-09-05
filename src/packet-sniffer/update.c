@@ -22,19 +22,19 @@ void update_send(char *cpy)
     if ((gret = getaddrinfo("localhost", "5000", &hints, &res)) != 0)
     {
         fprintf(fp_err, "update.c: getaddrinfo() failed, returned %d\n", gret);
-        fflush();
+        fflush(fp_err);
         handle_err();
     }
     if ((sockfd = socket(res->ai_family, res->ai_socktype, 0)) < 0)
     {
         fprintf(fp_err, "update.c: socket() failed, returned %d\n", sockfd);
-        fflush();
+        fflush(fp_err);
         handle_err();
     }
     if ((cret = connect(sockfd, res->ai_addr, res->ai_addrlen)) != 0)
     {
         fprintf(fp_err, "update.c: connect() failed, returned %d\n", cret);
-        fflush(); 
+        fflush(fp_err); 
         handle_err();
     }
     // Send the data

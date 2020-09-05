@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     if ((sock_raw = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL))) < 0)
     {
         fprintf(fp_err, "main.c: sock_raw failed to initialize, returned %d\n", sock_raw);
-        fflush();
+        fflush(fp_err);
         handle_err();
         return 1;
     }
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
         if ((r_len = recvfrom(sock_raw, buf, len, flags, &from, &fromlen)) < 0)
         {
             fprintf(fp_err, "main.c: recvfrom sock_raw failed, returned %d\n", r_len);
-            fflush();
+            fflush(fp_err);
             handle_err();
             return 1;
         }
