@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
                 socket.emit('secret', data.secret);
                 socket.on('console', (data) => {
                     this.setState(({ console }) => ({
-                        console: [...console, data]
+                        console: [data, ...console]
                     }));
                     console.log(1);
                 });
@@ -40,11 +40,9 @@ class Dashboard extends React.Component {
             <>
                 <h1>Dashboard</h1>
                 <div className="console">
-                    <ul>
-                        {this.state.console.map((e, i) => {
-                            return <li key={i}>{e}</li>
-                        })}
-                    </ul>
+                    {this.state.console.map((e, i) => {
+                        return <div key={i}>{e}</div>;
+                    })}
                 </div>
             </>
         );        

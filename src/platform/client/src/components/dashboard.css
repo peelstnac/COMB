@@ -1,5 +1,8 @@
-.console ul {
-    overflow:hidden;
-    overflow-y:scroll;
-    height:200px; width:18%;
+.console {
+    height: 90vh;
+    width: 90vw;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column-reverse;
 }
+  
