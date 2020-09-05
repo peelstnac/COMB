@@ -1,10 +1,38 @@
 .console {
-    height: 85vh;
-    width: 100%;
+    height: 75%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     overflow-x: hidden;
     overflow-y: scroll;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#auto-scroll {
+    margin-top: 20px;
+    width: 40%;
+    position: absolute;
+    left: 5%;
+    bottom: 6.25%;
+    transform: translateY(50%);
+}
+
+#go-back {
+    margin-top: 5px;
+    width: 40%;
+    position: absolute;
+    right: 5%;
+    bottom: 6.25%;
+    transform: translateY(50%);
 }
 
 body {
     background-color: #ffffff;
+}
+
+.wrapper {
+    position: relative;
+    padding: 0px !important;
 }

@@ -5,7 +5,7 @@
 
 html, body {
     width: auto!important;
-    overflow: hidden!important
+    overflow-x: hidden!important
 }
 
 .whole-page {

@@ -20,6 +20,7 @@ class Dashboard extends React.Component {
             autoScroll: "Turn off autoscroll"
         }
         this.handleAutoScroll = this.handleAutoScroll.bind(this);
+        this.handleBack = this.handleBack.bind(this);
     }
     componentDidMount() {
         axios.get(method + 'localhost:4000/auth/socket', { withCredentials: true }).then((res) => {
@@ -54,14 +55,16 @@ class Dashboard extends React.Component {
             };
         })
     }
+    handleBack() {
+        this.props.switchPage(1);
+    }
     render() {
         return (
             <>
                 <div className="container-fluid whole-page">
-                    <h1>Dashboard</h1>
                     <div className="row whole-page">
-                        <div className="col-md-6 card">    
-                            <div className="console">
+                        <div className="col-md-6 wrapper">
+                            <div className="console card">
                                 {this.state.console.map((e, i) => {
                                     return <div key={i}>{e}</div>;
                                 })}
@@ -69,11 +72,14 @@ class Dashboard extends React.Component {
                                     ref={(el) => { this.messagesEnd = el; }}>
                                 </div>
                             </div>
-                            <button onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
+                            <button id="go-back" className="btn btn-primary" onClick={this.handleBack}>Go Back</button>
+                            <button id="auto-scroll" className="btn btn-primary" onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
+
                         </div>
-                    </div>
-                    <div className="col-md-6 card">
-                                    
+                        <div className="col-md-6">
+                        </div>
+
+
                     </div>
                 </div>
             </>

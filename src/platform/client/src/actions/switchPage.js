@@ -1,7 +1,7 @@
 import { PAGE } from '../constants/page';
 
 const switchPage = (page) => {
-    return({
+    return ({
         type: PAGE,
         page: page
     });

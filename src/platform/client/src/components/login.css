@@ -13,9 +13,9 @@ body {
     background-color: #FFECB7;
 }
 
-.whole-page {
-    height: 100vh;
-    width: 100vw;
+.btn {
+    background-color: #03336E !important;
+    border: 0px;
 }
 
 .submit-btn {

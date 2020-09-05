@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // Import components
 import landing from './components/landing';
 import login from './components/login';
-import Dashboard from './components/dashboard';
+import dashboard from './components/dashboard';
 // Import actions
 import switchPage from './actions/switchPage';
 import updateAuth from './actions/updateAuth';
@@ -11,29 +11,30 @@ import updateAuth from './actions/updateAuth';
 // Redux boilerplate
 const landingMapStateToProps = (state) => {
     let { page, auth } = state;
-    return({
+    return ({
         page: page,
         auth: auth
     });
 }
 const landingMapDispatchToProps = (dispatch) => {
-    return({
-      switchPage: (page) => {
-        dispatch(switchPage(page));
-      },
-      updateAuth: (data) => {
-          dispatch(updateAuth(data));
-      }
+    return ({
+        switchPage: (page) => {
+            dispatch(switchPage(page));
+        },
+        updateAuth: (data) => {
+            dispatch(updateAuth(data));
+        }
     });
 }
 const Landing = connect(landingMapStateToProps, landingMapDispatchToProps)(landing);
 const Login = connect(landingMapStateToProps, landingMapDispatchToProps)(login);
+const Dashboard = connect(null, landingMapDispatchToProps)(dashboard);
 
 class App extends React.Component {
     render() {
         switch (this.props.page) {
             case 1:
-                return(
+                return (
                     <Landing />
                 );
             case 2:
@@ -45,7 +46,7 @@ class App extends React.Component {
                     <Dashboard />
                 );
             default:
-                return(
+                return (
                     <Landing />
                 );
         }
