@@ -19,7 +19,7 @@ void update_send(char *cpy)
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     int gret, cret;
-    if ((gret = getaddrinfo("localhost", "6000", &hints, &res)) != 0)
+    if ((gret = getaddrinfo("localhost", "5000", &hints, &res)) != 0)
     {
         fprintf(fp_err, "update.c: getaddrinfo() failed, returned %d\n", gret);
         handle_err();
@@ -44,7 +44,9 @@ void *update(void *store)
     char *cpy = malloc(50000);
     strcpy(cpy, (char *)store);
     memset((char *)store, 0, sizeof(store));
+#ifndef NDEBUG
     printf("\n \n \n UPDATE %s \n \n \n", cpy);
+#endif
     update_send(cpy);
     free(cpy);
     pthread_exit(NULL);

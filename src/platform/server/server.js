@@ -51,6 +51,8 @@ app.use('/dashboard', dashboard);
         }
     }
     console.log('server.js: connected to MongoDB.')
+    // Start the TCP server
+    tcpServer.start();
     // Listen on PORT
     http.listen(process.env.PORT, () => {
         console.log(`server.js: listening on PORT ${process.env.PORT}.`);
