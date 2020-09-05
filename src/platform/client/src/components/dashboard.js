@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 // Import CSS
+import './shared.css';
 import './dashboard.css';
 var method;
 if (process.env.NODE_ENV === 'development') {
@@ -56,20 +57,28 @@ class Dashboard extends React.Component {
     render() {
         return (
             <>
-                <h1>Dashboard</h1>
-                <div className="console">
-                    {this.state.console.map((e, i) => {
-                        return <div key={i}>{e}</div>;
-                    })}
-                    <div
-                        ref={(el) => { this.messagesEnd = el; }}>
+                <div className="container-fluid whole-page">
+                    <h1>Dashboard</h1>
+                    <div className="row whole-page">
+                        <div className="col-md-6 card">    
+                            <div className="console">
+                                {this.state.console.map((e, i) => {
+                                    return <div key={i}>{e}</div>;
+                                })}
+                                <div
+                                    ref={(el) => { this.messagesEnd = el; }}>
+                                </div>
+                            </div>
+                            <button onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
+                        </div>
+                    </div>
+                    <div className="col-md-6 card">
+                                    
                     </div>
                 </div>
-                <button onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
             </>
         );
     }
-
 }
 
 export default Dashboard;
