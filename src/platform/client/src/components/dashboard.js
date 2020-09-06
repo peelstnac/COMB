@@ -228,7 +228,8 @@ class Dashboard extends React.Component {
                             </div>
                             <button id="go-back" className="btn btn-primary" onClick={this.handleBack}>Go Back</button>
                             <button id="auto-scroll" className="btn btn-primary" onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
-                            <p id="connection-code">Your connection code is {this.state.connectionCode}.</p>
+                            <p id="connection-code">Your connection code is {this.state.connectionCode}. This does not need
+                            to be private, but it is best to keep it so.</p>
                         </div>
                         <div className="col-md-6">
                         </div>
