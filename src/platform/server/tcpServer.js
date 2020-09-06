@@ -8,6 +8,7 @@ const start = (io) => {
     const server = net.createServer(socket => {
         socket.on('data', (data) => {
             var str = data.toString();
+            // TODO get rid of Number cast and the .toString() to cast it back
             let connectionCode = Number(str.split(/\r?\n/)[0]);
             // TODO maybe use a map instead of an array so we can get rid of the O(n)
             for (let i = arr.length - 1; i >= 0; i--) {

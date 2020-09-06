@@ -15,7 +15,7 @@ void handle_tcp(char *store, char *buf, int r_len)
 #ifdef NDEBUG
     printf("TCP Header-------------------------------------\n");
     printf("Destination Port: %u\n", tcph_ptr->dest);
-    printf("Source Port: %u\n", tcph_ptr->dest);
+    printf("Source Port: %u\n", tcph_ptr->source);
     printf("seq: %u\n", ntohl(tcph_ptr->seq));
     printf("ack_seq: %u\n", ntohl(tcph_ptr->ack_seq));
     printf("res1: %d\n", ntohs(tcph_ptr->res1));
@@ -36,7 +36,7 @@ void handle_tcp(char *store, char *buf, int r_len)
     ptr += strlen(store);
     ptr += sprintf(ptr, "2\n");
     ptr += sprintf(ptr, "2.1 %u\n", tcph_ptr->dest);
-    ptr += sprintf(ptr, "2.2 %u\n", tcph_ptr->dest);
+    ptr += sprintf(ptr, "2.2 %u\n", tcph_ptr->source);
     ptr += sprintf(ptr, "2.3 %u\n", ntohl(tcph_ptr->seq));
     ptr += sprintf(ptr, "2.4 %u\n", ntohl(tcph_ptr->ack_seq));
     ptr += sprintf(ptr, "2.5 %d\n", ntohs(tcph_ptr->res1));
