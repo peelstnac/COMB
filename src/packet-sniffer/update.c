@@ -12,7 +12,7 @@
 // TCP connection
 void update_send(char *cpy)
 {
-    printf("%d", c_code);
+    printf("%zu\n", strlen(cpy));
     int sockfd;
     struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
