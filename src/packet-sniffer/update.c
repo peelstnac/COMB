@@ -12,7 +12,6 @@
 // TCP connection
 void update_send(char *cpy)
 {
-    printf("%zu\n", strlen(cpy));
     int sockfd;
     struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
@@ -38,7 +37,7 @@ void update_send(char *cpy)
         handle_err();
     }
     // Send the data
-    write(sockfd, cpy, 50000);
+    write(sockfd, cpy, strlen(cpy));
     close(sockfd);
 }
 
