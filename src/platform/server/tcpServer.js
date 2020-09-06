@@ -1,9 +1,9 @@
 'use strict';
 const net = require('net');
 // List of {secret: ..., connectionCode: ..., socket: ...}
+// TODO remove socket from the objects
 var arr = [];
 // Start a TCP server
-//
 const start = (io) => {
     const server = net.createServer(socket => {
         socket.on('data', (data) => {
@@ -19,9 +19,6 @@ const start = (io) => {
                 }
             }
         });
-        socket.on('end', () => {
-    
-        })
     })
     
     server.listen(5000, () => {
