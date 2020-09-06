@@ -1,0 +1,13 @@
+matrix:
+  include:
+    -language: C
+    compiler:
+      - gcc
+      - clang
+    before_script:
+      - cd src/packet-sniffer
+      - chmod +x build.sh build-dev.sh
+    script:
+      - ./build.sh
+      - rm -r build
+      - ./build-dev.sh
