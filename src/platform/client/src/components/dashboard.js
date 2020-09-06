@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            connectionCode: '',
             console: [],
             autoScroll: "Turn off autoscroll",
             height: 800, // Default height
@@ -45,6 +46,9 @@ class Dashboard extends React.Component {
             var { data } = res;
             console.log(data.connectionCode);
             if (data.secret.length > 0) {
+                this.setState({
+                    connectionCode: data.connectionCode.toString()
+                });
                 const socket = io(method + 'localhost:4000');
                 // Send the secret over
                 socket.emit('secret', data.secret);
@@ -224,7 +228,7 @@ class Dashboard extends React.Component {
                             </div>
                             <button id="go-back" className="btn btn-primary" onClick={this.handleBack}>Go Back</button>
                             <button id="auto-scroll" className="btn btn-primary" onClick={this.handleAutoScroll}>{this.state.autoScroll}</button>
-
+                            <p id="connection-code">Your connection code is {this.state.connectionCode}.</p>
                         </div>
                         <div className="col-md-6">
                         </div>
