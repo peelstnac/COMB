@@ -36,3 +36,28 @@ body {
     position: relative;
     padding: 0px !important;
 }
+
+.ethernet-title {
+    color: #ffffff;
+    background-color: #c01860;
+}
+
+.ip-title {
+    color: #ffffff;
+    background-color: #f078c0;
+}
+
+.tcp-title {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.dest {
+    color: #ffffff;
+    background-color: #d3b004;
+}
+
+.src {
+    color: #ffffff;
+    background-color: #60d8a8;
+}

@@ -35,20 +35,21 @@ class Dashboard extends React.Component {
                     // Parse the data
                     var arr = data.split(/\r?\n/);
                     var res = [];
-                    for (let i = arr.length - 1; i >= 0; i--) {
-                        let tokens = arr[i].split();
+                    for (let i = 0; i < arr.length; i++) {
+                        let tokens = arr[i].split(' ');
                         if (tokens.length === 1) {
                             switch(tokens[0]) {
-                                case 0:
+                                case "0":
                                     res.push(<div key={uuidv4()} className="ethernet-title">Ethernet Header--------------------------------</div>);
                                     break;
-                                case 1:
+                                case "1":
                                     res.push(<div key={uuidv4()} className="ip-title">IPv4 Header------------------------------------</div>);
                                     break;
-                                case 2:
+                                case "2":
                                     res.push(<div key={uuidv4()} className="tcp-title">TCP Header-------------------------------------</div>);
                                     break;
                                 default:
+                                    
                                     continue;
                             }
                             continue;
@@ -99,18 +100,59 @@ class Dashboard extends React.Component {
                             case "2.2":
                                 res.push(<div key={uuidv4}><span className="src">Source Port:</span> {tokens[1]}</div>);
                                 break;
+                            case "2.3":
+                                res.push(<div key={uuidv4}><span className="tag">seq:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.4":
+                                res.push(<div key={uuidv4}><span className="tag">ack_seq:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.5":
+                                res.push(<div key={uuidv4}><span className="tag">res1:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.6":
+                                res.push(<div key={uuidv4}><span className="tag">res2:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.7":
+                                res.push(<div key={uuidv4}><span className="tag">doff:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.8":
+                                res.push(<div key={uuidv4}><span className="tag">fin:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.9":
+                                res.push(<div key={uuidv4}><span className="tag">syn:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.10":
+                                res.push(<div key={uuidv4}><span className="tag">rst:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.11":
+                                res.push(<div key={uuidv4}><span className="tag">psh:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.12":
+                                res.push(<div key={uuidv4}><span className="tag">ack:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.13":
+                                res.push(<div key={uuidv4}><span className="tag">urg:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.14":
+                                res.push(<div key={uuidv4}><span className="tag">window:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.15":
+                                res.push(<div key={uuidv4}><span className="tag">check:</span> {tokens[1]}</div>);
+                                break;
+                            case "2.16":
+                                res.push(<div key={uuidv4}><span className="tag">urg_ptr:</span> {tokens[1]}</div>);
+                                break;
                         }
                     }
                     this.setState(({ console }) => ({
-                        console: [...console, data]
+                        console: [...console, ...res]
                     }));
-                    console.log(1);
                 });
             }
         });
     }
     componentDidUpdate() {
-        if (this.state.autoScroll === "Turn off autoscroll") this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        if (this.state.autoScroll === "Turn off autoscroll") this.messagesEnd.scrollIntoView();
     }
     handleAutoScroll() {
         this.setState((state) => {
