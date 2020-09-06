@@ -64,23 +64,31 @@ io.on('connection', (socket) => {
     let secret;
     socket.on('secret', (data) => {
         secret = data;
-            let { arr } = tcpServer;
-            // Find the secret in the array
-            var flag = false;
-            for (let i = arr.length - 1; i >= 0; i--) {
-                if (arr[i].secret === secret) {
-                    flag = true;
-                    // Add the socket to the array
-                    // arr.socket = socket; THIS PART DOES NOT WORK, FIX BELOW
+        let { arr } = tcpServer;
+        // Find the secret in the array
+        var flag = false;
+        for (let i = arr.length - 1; i >= 0; i--) {
+            if (arr[i].secret === secret) {
+                flag = true;
+                // Add the socket to the array
+                // arr.socket = socket; THIS PART DOES NOT WORK, FIX BELOW
 
-                    // FIX: every socket joins their own room
-                    socket.join(arr[i].connectionCode.toString());
-                    break;
-                }
+                // FIX: every socket joins their own room
+                socket.join(arr[i].connectionCode.toString());
+                break;
             }
-            // TODO handle flag === false
+        }
+        // TODO handle flag === false
     });
-    // TODO handle disconnect
+    socket.on('disconnect', () => {
+        let { arr } = tcpServer;
+        for (let i = arr.length - 1; i >= 0; i--) {
+            if (arr[i].secret === secret) {
+                arr.splice(i, 1);
+                break;
+            }
+        }
+    });
 });
 
 [`SIGINT`, `SIGUSR1`, `SIGUSR2`, `uncaughtException`, `SIGTERM`].forEach((eventType) => {
