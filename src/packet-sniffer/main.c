@@ -31,7 +31,7 @@ static int update_count = 0;
 // Once count reaches max_count, the store will be cleared
 
 #ifndef NDEBUG
-static int max_count = 30 ;
+static int max_count = 10 ;
 #else
 static int max_count = 50;
 #endif
