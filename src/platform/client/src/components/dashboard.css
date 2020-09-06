@@ -59,3 +59,10 @@ body {
     color: #ffffff;
     background-color: #60d8a8;
 }
+
+#connection-code {
+    position: absolute;
+    left: 5%;
+    top: 6.25%;
+    transform: translateY(-50%);
+}
