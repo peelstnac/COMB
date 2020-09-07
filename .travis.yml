@@ -15,7 +15,7 @@ matrix:
 
     -language: node_js
     before_script: 
-      - cd ../platform/client
+      - cd src/platform/client
     script:
       - npm run build
 
