@@ -32,7 +32,7 @@ class Landing extends React.Component {
                         </div>
                         <div className="col-md-1"></div>
                         <div className="col-md-4 my-auto">
-                            <img id="right-image" src={right_img} />
+                            <img id="right-image" alt="Image depicting technology relating to packet sniffing" src={right_img} />
                         </div>
                     </div>
                 </div>
