@@ -23,11 +23,11 @@ matrix:
         - npm run build
 
     - language: node_js
-    node_js:
-      - 14
-    before_script:
-      - cd src/platform/server
-      - npm install
-    script:
-      - npm run start
+      node_js:
+        - 14
+      before_script:
+        - cd src/platform/server
+        - npm install
+      script:
+        - npm run start
 
