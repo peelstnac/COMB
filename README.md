@@ -1,4 +1,5 @@
 # COMB
+[![Build Status](https://travis-ci.org/peelstnac/COMB.svg?branch=master)](https://travis-ci.org/peelstnac/COMB)
 > Packet sniffing made easy.
 
 ## What is COMB?
