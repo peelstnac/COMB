@@ -7,6 +7,12 @@ COMB is a packet sniffer that can stream sniffing data to a central dashboard, m
 ## Table of Contents
 * [Building](#building)
     * [Development](#development)
+        * [Build the packet sniffer](#build-the-packet-sniffer)
+        * [Launch the server](#launch-the-server)
+    * [Production](#production)
+* [Environment variables](#environment-variables)
+* [File structure](#file-structure)
+* [Testing](#testing)
 
 ## Building
 Below are build instructions for development and production.
@@ -45,7 +51,7 @@ npm run dev
 * When launching the React app, do ```npm run build``` and then ```npm serve -p 3000 -s build``` instead.
 * WHen launching the Express server, run ```npm start``` instead.
 
-## Environment Variables
+## Environment variables
 * See File Structure below to see where to put the .env files.
 ```
 PORT=4000
@@ -54,7 +60,7 @@ DATABASE_NAME=
 SESSION_SECRET=
 ```
 
-## File Structure
+## File structure
 * Below is the file structure for this project.
 * src/packet-sniffer:
 ```
