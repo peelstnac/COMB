@@ -14,8 +14,10 @@ matrix:
       - rm -r build
 
     -language: node_js
-    before_script: 
+    before_install:
       - cd src/platform/client
+    install:
+      - npm install
     script:
       - npm run build
 
