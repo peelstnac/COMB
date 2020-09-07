@@ -1,6 +1,6 @@
 matrix:
   include:
-    -language: C
+    - language: C
     compiler:
       - gcc
       - clang
@@ -11,3 +11,15 @@ matrix:
       - ./build.sh
       - rm -r build
       - ./build-dev.sh
+      - rm -r build
+
+    - language: node_js
+    node_js:
+      - 14
+    before_script:
+      - cd src/platform/client
+      - npm install
+    script:
+      - npm run build
+
+
