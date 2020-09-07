@@ -23,17 +23,18 @@ router.use(session({
 
 // Auth routes
 // Check if user is autenticated
-router.get('/isAuth/:username', (req, res) => {
+router.get('/isAuth', (req, res) => {
     let sess = req.session;
-    let username = req.params.username;
-    if (sess[username]) {
+    if (sess.usr) {
         res.json({
-            isAuth: true
+            isAuth: true,
+            usr: sess.usr
         });
     } else {
         res.json({
-            isAuth: false
-        })
+            isAuth: false,
+            usr: ''
+        });
     }
 });
 
