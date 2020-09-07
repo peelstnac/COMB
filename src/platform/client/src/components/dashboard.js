@@ -63,13 +63,13 @@ class Dashboard extends React.Component {
                         if (tokens.length === 1) {
                             switch (tokens[0]) {
                                 case "0":
-                                    res.push(<div  className="ethernet-title">Ethernet Header--------------------------------</div>);
+                                    res.push(<div className="ethernet-title">Ethernet Header--------------------------------</div>);
                                     break;
                                 case "1":
-                                    res.push(<div  className="ip-title">IPv4 Header------------------------------------</div>);
+                                    res.push(<div className="ip-title">IPv4 Header------------------------------------</div>);
                                     break;
                                 case "2":
-                                    res.push(<div  className="tcp-title">TCP Header-------------------------------------</div>);
+                                    res.push(<div className="tcp-title">TCP Header-------------------------------------</div>);
                                     break;
                                 default:
 
@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
     handleAutoScroll() {
         this.setState((state) => {
             var buttonText = "";
-            if (this.state.autoScroll === "Turn off autoscroll") {  
+            if (this.state.autoScroll === "Turn off autoscroll") {
                 buttonText = "Turn on autoscroll";
             } else {
                 buttonText = "Turn off autoscroll";
@@ -216,14 +216,14 @@ class Dashboard extends React.Component {
                         <div id="subc" className="col-md-6 wrapper">
                             <div id="console" className="console card">
                                 <List
-                                    ref={(el) => {this.consoleList = el}}
+                                    ref={(el) => { this.consoleList = el }}
                                     width={this.state.width}
                                     height={this.state.height}
                                     rowHeight={30}
                                     rowRenderer={this.renderRow}
                                     rowCount={this.state.console.length}
                                     overscanRowCount={0}
-                                
+
                                 />
                             </div>
                             <button id="go-back" className="btn btn-primary" onClick={this.handleBack}>Go Back</button>
