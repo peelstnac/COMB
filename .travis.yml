@@ -11,3 +11,12 @@ matrix:
       - ./build.sh
       - rm -r build
       - ./build-dev.sh
+      - rm -r build
+
+    -language: node_js
+    before_script: 
+      - cd ../platform/client
+    script:
+      - npm run build
+
+
