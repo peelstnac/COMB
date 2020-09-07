@@ -16,9 +16,8 @@ matrix:
     -language: node_js
     node_js:
       - 14
-    before_install:
+    before_script:
       - cd src/platform/client
-    install:
       - npm install
     script:
       - npm run build
