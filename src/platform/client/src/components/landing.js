@@ -19,14 +19,6 @@ class Landing extends React.Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-    // Check if already logged in
-    componentDidMount() {
-        axios.get(method + 'localhost:4000/auth/isAuth', { withCredentials: true }).then(({ data }) => {
-            if (data.isAuth) {
-                this.props.switchPage(3);
-            }
-        });
-    }
     // Switch the page to the login
     handleClick() {
         this.props.switchPage(2);
