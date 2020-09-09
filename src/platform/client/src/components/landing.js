@@ -1,17 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 // Import CSS
 import './shared.css';
 import './landing.css';
 // Import assets
 import right_img from './assets/1.png';
-
-var method;
-if (process.env.NODE_ENV === 'development') {
-    method = 'http://';
-} else {
-    method = 'https://';
-}
 
 // Create landing page with login button
 class Landing extends React.Component {
