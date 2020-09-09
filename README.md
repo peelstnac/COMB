@@ -3,7 +3,7 @@
 > Packet sniffing made easy.
 
 ## What is COMB?
-COMB is a packet sniffer that can stream sniffing data to a central dashboard, making it easier to manage different systems. As of now, COMB is functional, but in it's early phase of development (see issues).
+COMB is a packet sniffer that can stream sniffing data to a central dashboard, making it easier to manage multiple systems. As of now, COMB is functional, but in it's early phase of development (see issues).
 
 ## Table of Contents
 * [Building](#building)
