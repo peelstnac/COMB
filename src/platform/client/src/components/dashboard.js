@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import io, { connect } from 'socket.io-client';
+import io from 'socket.io-client';
 import List from 'react-virtualized/dist/commonjs/List';
-// Import CSS
-import './main.css';
 
 var method;
 if (process.env.NODE_ENV === 'development') {
@@ -322,7 +320,7 @@ class Dashboard extends React.Component {
             <>
                 <div className="dashboard-layout">
                     <div className="dashboard-navbar">
-                        <button id="go-back" id="dashboard-go-back" onClick={this.handleBack}>Go Back</button>
+                        <button id="dashboard-go-back" onClick={this.handleBack}>Go Back</button>
                     </div>
 
                     <div className="dashboard-console-left">
@@ -339,7 +337,7 @@ class Dashboard extends React.Component {
                             />
                         </div>
 
-                        <button id="auto-scroll" id="dashboard-auto-scroll" onClick={this.handleAutoScrollLeft}>{this.state.autoScrollLeft}</button>
+                        <button className="dashboard-auto-scroll" onClick={this.handleAutoScrollLeft}>{this.state.autoScrollLeft}</button>
                     </div>
                     <div className="dashboard-console-right">
                         <div id="console-right">
@@ -355,7 +353,7 @@ class Dashboard extends React.Component {
                             />
                         </div>
 
-                        <button id="auto-scroll" id="dashboard-auto-scroll" onClick={this.handleAutoScrollRight}>{this.state.autoScrollRight}</button>
+                        <button className="dashboard-auto-scroll" onClick={this.handleAutoScrollRight}>{this.state.autoScrollRight}</button>
                     </div>
                 </div>
             </>

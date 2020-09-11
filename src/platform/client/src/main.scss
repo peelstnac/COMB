@@ -8,6 +8,11 @@
     width: auto;
 }
 
+@font-face {
+    font-family: "freestyle";
+    src: url("fonts/FREESCPT.TTF");
+}
+
 .dashboard-layout {
     @include clear();
     @include page();
