@@ -78,15 +78,15 @@ class Dashboard extends React.Component {
                         if (tokens.length === 1) {
                             switch (tokens[0]) {
                                 case "0":
-                                    resLeft.push(<div className="ethernet-title">Ethernet Header--------------------------------</div>);
+                                    resLeft.push(<div className="ethernet-title">Ethernet Header | {this.cntval()} </div>);
                                     this.cntLeft();
                                     break;
                                 case "1":
-                                    resLeft.push(<div className="ip-title">IPv4 Header------------------------------------</div>);
+                                    resLeft.push(<div className="ip-title">IPv4 Header</div>);
                                     this.cntLeft();
                                     break;
                                 case "2":
-                                    resLeft.push(<div className="tcp-title">TCP Header-------------------------------------</div>);
+                                    resLeft.push(<div className="tcp-title">TCP Header</div>);
                                     this.cntLeft();
                                     break;
                                 default:
@@ -108,8 +108,8 @@ class Dashboard extends React.Component {
                                 resLeft.push(<div ><span className="tag">Protocol ID:</span> {tokens[1]}</div>);
                                 this.cntLeft();
                                 // Right console
-                                resRight.push(<div className="console-right-head">
-                                    #{this.cntval()} - TCP
+                                resRight.push(<div className="console-right-head tcp-title">
+                                    TCP Protocol | {this.cntval()}
                                 </div>); 
                                 break;
                             case "1.1":
@@ -122,10 +122,12 @@ class Dashboard extends React.Component {
                                 break;
                             case "1.3":
                                 resLeft.push(<div ><span className="dest">Destination:</span> {tokens[1]}</div>);
+                                resRight.push(<div ><span className="dest">Destination:</span> {tokens[1]}</div>);
                                 this.cntLeft();
                                 break;
                             case "1.4":
                                 resLeft.push(<div ><span className="src">Source:</span> {tokens[1]}</div>);
+                                resRight.push(<div ><span className="src">Source:</span> {tokens[1]}</div>);
                                 this.cntLeft();
                                 break;
                             case "1.5":
@@ -250,7 +252,7 @@ class Dashboard extends React.Component {
 
     renderConsoleRowRight({ index, key, style }) {
         return (
-            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[index + 1]); } } key={key} style={style} className="">
+            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[index/3]); } } key={key} style={style} className="">
                 {this.state.consoleRight[index]}
             </div>
         );
@@ -292,6 +294,7 @@ class Dashboard extends React.Component {
         }
         // Go to index
         this.consoleListLeft.scrollToRow(to);
+        console.log(this.consoleMapper);
     }
 
     handleBack() {
