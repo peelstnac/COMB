@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 // Import CSS
-import './shared.css';
-import './login.css';
+// import './shared.css';
+ import './login.css';
 // Import components
 import NotAuthCard from './notAuthCard';
 import RegisterStatusCard from './registerStatusCard';

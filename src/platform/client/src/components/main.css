@@ -1,0 +1,46 @@
+.dashboard-layout {
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  width: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 54px auto;
+  grid-template-areas: "navbar navbar" "console-left console-right";
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-navbar {
+  grid-area: navbar;
+  height: 100%;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: #3b3b3b;
+}
+
+.dashboard-console-left, .dashboard-console-right {
+  grid-area: console-left;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-console-right {
+  grid-area: console-right !important;
+}
+
+#console-left, #console-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=main.css.map */

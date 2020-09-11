@@ -1,0 +1,58 @@
+@mixin clear() {
+    margin: 0px;
+    padding: 0px;
+}
+
+@mixin page() {
+    height: 100vh;
+    width: auto;
+}
+
+.dashboard-layout {
+    @include clear();
+    @include page();
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 54px auto;
+    grid-template-areas: "navbar navbar"
+                         "console-left console-right";
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-navbar {
+    grid-area: navbar;
+    height: 100%;
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: #3b3b3b;
+}
+
+.dashboard-console-left {
+    grid-area: console-left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-console-right {
+    @extend .dashboard-console-left;
+    grid-area: console-right !important;
+}
+
+#console-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#console-right {
+    @extend #console-left;
+}

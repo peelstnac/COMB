@@ -1,7 +1,7 @@
 import React from 'react';
 // Import CSS
-import './shared.css';
-import './landing.css';
+// import './shared.css';
+// import './landing.css';
 // Import assets
 import right_img from './assets/1.png';
 
