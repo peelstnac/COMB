@@ -31,6 +31,7 @@ class Dashboard extends React.Component {
         this.consoleLeftJump = this.consoleLeftJump.bind(this);
 
         this.handleBack = this.handleBack.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
 
         this.cnt = 1;
         // TODO fix variable names
@@ -60,7 +61,6 @@ class Dashboard extends React.Component {
                 this.setState({
                     connectionCode: data.connectionCode.toString()
                 });
-                console.log(this.state.connectionCode);
                 const socket = io(method + 'localhost:4000');
                 // Send the secret over
                 socket.emit('secret', data.secret);
@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
                                     break;
                                 case "2":
                                     resLeft.push(<div className="tcp-title">TCP Header</div>);
-                                    this.cntLeft();
+                                    this.consoleMapper[this.getcnt()] = this.cntLeft();
                                     break;
                                 default:
 
@@ -216,7 +216,7 @@ class Dashboard extends React.Component {
                                 break;
                             case "2.16":
                                 resLeft.push(<div ><span className="tag">urg_ptr:</span> {tokens[1]}</div>);
-                                this.consoleMapper[this.getcnt()] = this.cntLeft();
+                                this.cntLeft();
                                 break;
                             default:
                             // console.log("WHY WAS DEFAULT TRIGGERED?");
@@ -252,7 +252,7 @@ class Dashboard extends React.Component {
 
     renderConsoleRowRight({ index, key, style }) {
         return (
-            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[index/3]); } } key={key} style={style} className="">
+            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[index/3+1]); } } key={key} style={style} className="">
                 {this.state.consoleRight[index]}
             </div>
         );
@@ -270,7 +270,6 @@ class Dashboard extends React.Component {
                 autoScrollLeft: buttonText
             };
         });
-        console.log(1);
     }
 
     handleAutoScrollRight() {
@@ -294,11 +293,17 @@ class Dashboard extends React.Component {
         }
         // Go to index
         this.consoleListLeft.scrollToRow(to);
-        console.log(this.consoleMapper);
     }
 
     handleBack() {
         this.props.switchPage(1);
+    }
+
+    handleLogout() {
+        let p = axios.get(method + 'localhost:4000/auth/logout', { withCredentials: true });
+        Promise.resolve(p).then((res) => {
+            this.props.switchPage(1);
+        });
     }
 
     // Console counter to map right to left
@@ -323,7 +328,10 @@ class Dashboard extends React.Component {
             <>
                 <div className="dashboard-layout">
                     <div className="dashboard-navbar">
-                        <button id="dashboard-go-back" onClick={this.handleBack}>Go Back</button>
+                        <h2 id="dashboard-title">Dashboard</h2>
+                        <p>Your connection cide is {this.state.connectionCode}. Click on the protocol labels on the right console to display more information on the left.</p>
+                        <button className="nav-btn" id="dashboard-logout" onClick={this.handleLogout}>Logout</button>
+                        <button className="nav-btn" id="dashboard-go-back" onClick={this.handleBack}>Go Back</button>
                     </div>
 
                     <div className="dashboard-console-left">

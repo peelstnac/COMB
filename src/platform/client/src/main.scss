@@ -33,8 +33,33 @@
     position: sticky;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     background-color: #3b3b3b;
+    p {
+        align-self: center;
+        color: #fff;
+        margin: 0px;
+    }
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+#dashboard-logout {
+    margin-left: auto;
+}
+
+.nav-btn:hover {
+    background: #222;
+}
+
+#dashboard-title {
+    align-self: center;
+    margin-right: auto;
+    margin-left: 15px;
+    color: #fff;
 }
 
 .dashboard-console-left {
