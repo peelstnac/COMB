@@ -136,6 +136,11 @@ router.post('/register', (req, res) => {
     });
 });
 
+router.get('/logout', (req, res) => {
+    req.session = null;
+    res.sendStatus(200);
+});
+
 router.get('/socket', (req, res) => {
     let sess = req.session;
     if (sess.isAuth) {

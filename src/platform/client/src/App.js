@@ -7,6 +7,8 @@ import dashboard from './components/dashboard';
 // Import actions
 import switchPage from './actions/switchPage';
 import updateAuth from './actions/updateAuth';
+// Import CSS
+import './main.css';
 
 // Redux boilerplate
 const landingMapStateToProps = (state) => {
