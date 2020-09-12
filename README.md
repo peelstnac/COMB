@@ -5,6 +5,9 @@
 ## What is COMB?
 COMB is a packet sniffer that can stream sniffing data to a central dashboard, making it easier to manage multiple systems. As of now, COMB is functional, but in it's early phase of development (see issues).
 
+![Image of COMB landing page](https://i.imgur.com/zC1HlfK.png)
+![Image of COMB dashboard](https://i.imgur.com/4v3u5s7.png)
+
 ## Table of Contents
 * [Building](#building)
     * [Development](#development)
@@ -83,10 +86,9 @@ SESSION_SECRET=
 │   └── update.h
 ├── main.c
 ├── start.c
-├── tree.txt
 └── update.c
 
-1 directory, 18 files
+1 directory, 17 files
 ```
 * src/platform/client:
 ```
@@ -97,46 +99,49 @@ SESSION_SECRET=
 │   ├── index.html
 │   ├── manifest.json
 │   └── robots.txt
-├── README.md
-├── src
-│   ├── actions
-│   │   ├── switchPage.js
-│   │   └── updateAuth.js
-│   ├── App.js
-│   ├── components
-│   │   ├── assets
-│   │   │   ├── 1.png
-│   │   │   └── 2.png
-│   │   ├── dashboard.css
-│   │   ├── dashboard.js
-│   │   ├── fonts
-│   │   │   └── FREESCPT.TTF
-│   │   ├── landing.css
-│   │   ├── landing.js
-│   │   ├── login.css
-│   │   ├── login.js
-│   │   ├── notAuthCard.js
-│   │   ├── registerStatusCard.js
-│   │   └── shared.css
-│   ├── constants
-│   │   ├── auth.js
-│   │   └── page.js
-│   ├── index.js
-│   ├── reducers
-│   │   ├── authReducer.js
-│   │   ├── pageReducer.js
-│   │   └── rootReducer.js
-│   └── store.js
-└── tree.txt
+└── src
+    ├── actions
+    │   ├── switchPage.js
+    │   └── updateAuth.js
+    ├── App.js
+    ├── components
+    │   ├── assets
+    │   │   ├── 1.png
+    │   │   ├── 2.png
+    │   │   └── bg.png
+    │   ├── dashboard.js
+    │   ├── landing.js
+    │   ├── login.js
+    │   ├── notAuthCard.js
+    │   └── registerStatusCard.js
+    ├── constants
+    │   ├── auth.js
+    │   └── page.js
+    ├── fonts
+    │   └── FREESCPT.TTF
+    ├── index.js
+    ├── main.css
+    ├── main.css.map
+    ├── main.scss
+    ├── reducers
+    │   ├── authReducer.js
+    │   ├── pageReducer.js
+    │   └── rootReducer.js
+    ├── scss_dashboard.scss
+    ├── scss_fancy_button.scss
+    ├── scss_landing.scss
+    ├── scss_login.scss
+    ├── scss_mixins.scss
+    └── store.js
 
-8 directories, 29 files
+8 directories, 32 files
 ```
 * src/platform/server:
 ```
 .
+├──.env
 ├── constants
 │   └── URL.js
-├── .env
 ├── models
 │   └── login.js
 ├── package.json
@@ -145,8 +150,7 @@ SESSION_SECRET=
 │   ├── auth.js
 │   └── dashboard.js
 ├── server.js
-├── tcpServer.js
-└── tree.txt
+└── tcpServer.js
 
 3 directories, 9 files
 ```
