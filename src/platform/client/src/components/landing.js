@@ -15,7 +15,7 @@ class Landing extends React.Component {
     render() {
         return (
             <>
-                <div className="container-fluid whole-page">
+                <div className="landing-page">
                     <div className="row whole-page">
                         <div className="col-md-1"></div>
                         <div className="col-md-5 my-auto text-center">

@@ -252,7 +252,7 @@ class Dashboard extends React.Component {
 
     renderConsoleRowRight({ index, key, style }) {
         return (
-            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[index/3+1]); } } key={key} style={style} className="">
+            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[Math.floor(index/3)+1]); } } key={key} style={style} className="">
                 {this.state.consoleRight[index]}
             </div>
         );
@@ -304,6 +304,7 @@ class Dashboard extends React.Component {
         Promise.resolve(p).then((res) => {
             this.props.switchPage(1);
         });
+        console.log("EEEE");
     }
 
     // Console counter to map right to left
