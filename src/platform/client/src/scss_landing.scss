@@ -1,0 +1,97 @@
+@import 'scss_mixins', 'scss_fancy_button';
+
+.landing-left-box {
+    text-align: center;
+}
+
+#landing-login {
+    border: none;
+    background: none;
+}
+
+@media (max-width: 900px) {
+    .landing-wrapper {
+        @include clear();
+        @include page();
+        display: grid;
+        grid-template-rows: 50% 50%;
+        grid-template-areas: "left"
+                             "right";
+        background-color: #000066;
+    }
+    .landing-left {
+        grid-area: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #landing-title {
+        font-family: freestyle;
+        font-size: 144px;
+        color: #FFECB7;
+    }
+    
+    #landing-subtitle {
+        font-size: 24px;
+        color: #FFECB7;
+    }
+    
+    .landing-right {
+        grid-area: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #landing-right-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+@media (min-width: 900px) {
+    .landing-wrapper {
+        @include clear();
+        @include page();
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: "left right";
+        background-image: url("./components/assets/bg.png");
+        background-size: cover;
+    }
+
+    .landing-left {
+        grid-area: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    #landing-title {
+        font-family: freestyle;
+        font-size: 200px;
+        color: #FFECB7;
+    }
+
+    #landing-subtitle {
+        font-size: 24px;
+        color: #FFECB7;
+    }
+
+    .landing-right {
+        grid-area: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    #landing-right-image {
+        max-width: 70%;
+        max-height: 70%;
+    }
+}

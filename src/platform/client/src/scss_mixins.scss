@@ -1,0 +1,14 @@
+@mixin clear() {
+    margin: 0px;
+    padding: 0px;
+}
+
+@mixin page() {
+    height: 100vh;
+    width: auto;
+}
+
+@font-face {
+    font-family: "freestyle";
+    src: url("fonts/FREESCPT.TTF");
+}

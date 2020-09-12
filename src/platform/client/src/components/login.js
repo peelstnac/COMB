@@ -136,9 +136,7 @@ class Login extends React.Component {
         return (
             <>
                 <div className="container-fluid">
-                    <div className="row whole-page text-center">
-                        <div className="col-md-4"></div>
-                        <div className="col-md-4 my-auto">
+                    <div className="login-wrapper">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="form-group">
@@ -156,8 +154,6 @@ class Login extends React.Component {
                             </div>
                             <NotAuthCard notAuthCardState={this.state.notAuthCardState} />
                             <RegisterStatusCard registerStatusCardState={this.state.registerStatusCardState} />
-                        </div>
-                        <div className="col-md-4"></div>
                     </div>
                 </div>
             </>

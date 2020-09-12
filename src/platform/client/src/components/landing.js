@@ -15,22 +15,17 @@ class Landing extends React.Component {
     render() {
         return (
             <>
-                <div className="landing-page">
-                    <div className="row whole-page">
-                        <div className="col-md-1"></div>
-                        <div className="col-md-5 my-auto text-center">
-                            <h1 className="title">
-                                COMB
-                        </h1>
-                            <h2 id="bottom-text">
-                                Packet sniffing made easy.
-                        </h2>
-                            <button id="login-btn" onClick={this.handleClick} type="button" className="btn btn-primary btn-lg">Login</button>
+                <div className="landing-wrapper">
+                    <div className="landing-left">
+                        <div className="landing-left-box">
+                            <h1 id="landing-title">COMB</h1>
+                            <h3 id="landing-subtitle">Packet sniffing made easy.</h3>
+                            <button onClick={this.handleClick} id="landing-login" class="fancy-button bg-gradient1"><span>Join now</span></button>
                         </div>
-                        <div className="col-md-1"></div>
-                        <div className="col-md-4 my-auto">
-                            <img id="right-image" alt="Technology relating to packet sniffing" src={right_img} />
-                        </div>
+
+                    </div>
+                    <div className="landing-right">
+                        <img id="landing-right-image" src={right_img} alt="Depicting a computer network."></img>
                     </div>
                 </div>
             </>
