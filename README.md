@@ -54,6 +54,7 @@ npm run dev
 * Instead of running build-dev.sh, run build.sh for the packet sniffer.
 * When launching the React app, do ```npm run build``` and then ```npm serve -p 3000 -s build``` instead.
 * WHen launching the Express server, run ```npm start``` instead.
+* Ensure HTTPS & URL in src/packet-sniffer/update.c is pointing to your server address instead of localhost.
 
 ## Environment variables
 * See File Structure below to see where to put the .env files.
