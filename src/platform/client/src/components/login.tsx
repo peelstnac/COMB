@@ -1,18 +1,37 @@
 import React from 'react';
 import axios from 'axios';
+import { connect, ConnectedProps } from 'react-redux';
+import { mapState, mapDispatch } from './landing';
 // Import components
 import NotAuthCard from './notAuthCard';
 import RegisterStatusCard from './registerStatusCard';
 // Configure HTTP vs HTTPS
-var method;
+var method: string;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
 } else {
     method = 'https://';
 }
 
-class Login extends React.Component {
-    constructor(props) {
+type LoginStateType = {
+    formUsername: string,
+    formPassword: string,
+    notAuthCardState: {
+        msg: string,
+        err: boolean | string
+    },
+    registerStatusCardState: {
+        success: boolean,
+        msg: string,
+        err: boolean | string
+    }
+};
+
+const connector = connect(mapState, mapDispatch);
+type LoginPropType = ConnectedProps<typeof connector>;
+
+class Login extends React.Component<LoginPropType, LoginStateType> {
+    constructor(props: any) {
         super(props);
         this.state = {
             formUsername: '',
@@ -38,12 +57,12 @@ class Login extends React.Component {
         this.props.switchPage(1);
     }
     // Set local state to input values
-    handleUsernameChange(event) {
+    handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             formUsername: event.target.value
         });
     }
-    handlePasswordChange(event) {
+    handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             formPassword: event.target.value
         });
@@ -161,4 +180,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default connector(Login);

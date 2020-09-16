@@ -6,21 +6,9 @@ import { Provider, connect } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 // Import components
-import app from './App';
+import App from './App';
 
 // Redux boilerplate
-const appMapStateToProps = (state) => {
-  const { page } = state;
-  return ({
-    page: page
-  });
-}
-const appMapDispatchToProps = (dispatch) => {
-  return ({
-
-  });
-}
-const App = connect(appMapStateToProps, appMapDispatchToProps)(app);
 
 ReactDOM.render(
   <Provider store={store}>
