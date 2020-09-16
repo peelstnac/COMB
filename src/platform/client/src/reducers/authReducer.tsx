@@ -1,7 +1,7 @@
 import { AUTH } from '../constants/auth';
-import { authType } from '../actions/updateAuth';
+import { AuthType } from '../actions/updateAuth';
 
-interface actionType extends authType {
+interface actionType extends AuthType {
     type: string
 }
 

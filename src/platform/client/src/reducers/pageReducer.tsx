@@ -5,11 +5,11 @@ To determine which of 3 pages to load
 3 - dashboard
 */
 import { PAGE } from '../constants/page';
-import { pageType } from '../actions/switchPage';
+import { PageType } from '../actions/switchPage';
 
 const defaultState = 1;
 
-const pageReducer = (state = defaultState, action: pageType) => {
+const pageReducer = (state = defaultState, action: PageType) => {
     switch (action.type) {
         case PAGE:
             return action.page;

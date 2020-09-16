@@ -6,7 +6,7 @@ type NotAuthCardPropType = {
         err: boolean | string
     }
 }
-export const NotAuthCard: React.FC<NotAuthCardPropType> = (props) => {
+const NotAuthCard: React.FC<NotAuthCardPropType> = (props) => {
     var notAuthCardState = props.notAuthCardState;
     if (notAuthCardState.msg.length === 0) {
         return (
@@ -20,3 +20,5 @@ export const NotAuthCard: React.FC<NotAuthCardPropType> = (props) => {
         );
     }
 }
+
+export default NotAuthCard;

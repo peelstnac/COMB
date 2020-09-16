@@ -1,16 +1,39 @@
 import React from 'react';
-
+import { connect, ConnectedProps } from 'react-redux';
+import { updateAuth, AuthType } from '../actions/updateAuth';
+import { switchPage } from '../actions/switchPage';
 // Import assets
 import right_img from './assets/1.png';
 
-// Import interfaces
-import { pageType } from '../actions/switchPage';
-
-type landingPropsType = {
-    switchPage: (page: number) => pageType;
+export interface DefaultState {
+    page: number,
+    auth: AuthType
 }
 
-export const Landing: React.FC<landingPropsType> = (props) => {
+export const mapState = (state: DefaultState) => {
+    var { page, auth } = state;
+    return ({
+        page: page,
+        auth: auth
+    });
+}
+
+export const mapDispatch = (dispatch: any) => {
+    return ({
+        switchPage: (page: number) => {
+            dispatch(switchPage(page));
+        },
+        updateAuth: (data: AuthType) => {
+            dispatch(updateAuth(data));
+        }
+    });
+}
+
+const connector = connect(mapState, mapDispatch);
+type LandingPropType = ConnectedProps<typeof connector>;
+
+
+const Landing: React.FC<LandingPropType> = (props) => {
     // Switch the page to the login
     const handleClick: () => void = () => {
         props.switchPage(2);
@@ -33,3 +56,5 @@ export const Landing: React.FC<landingPropsType> = (props) => {
             </>
         );
 }
+
+export default connector(Landing);

@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import { connect, ConnectedProps } from 'react-redux';
+import { mapState, mapDispatch } from './landing';
 // Import components
-import { NotAuthCard } from './notAuthCard';
-import { RegisterStatusCard } from './registerStatusCard';
+import NotAuthCard from './notAuthCard';
+import RegisterStatusCard from './registerStatusCard';
 // Configure HTTP vs HTTPS
 var method: string;
 if (process.env.NODE_ENV === 'development') {
@@ -11,7 +13,24 @@ if (process.env.NODE_ENV === 'development') {
     method = 'https://';
 }
 
-export class Login extends React.Component<any, any> {
+type LoginStateType = {
+    formUsername: string,
+    formPassword: string,
+    notAuthCardState: {
+        msg: string,
+        err: boolean | string
+    },
+    registerStatusCardState: {
+        success: boolean,
+        msg: string,
+        err: boolean | string
+    }
+};
+
+const connector = connect(mapState, mapDispatch);
+type LoginPropType = ConnectedProps<typeof connector>;
+
+class Login extends React.Component<LoginPropType, LoginStateType> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -160,3 +179,5 @@ export class Login extends React.Component<any, any> {
         );
     }
 }
+
+export default connector(Login);

@@ -1,6 +1,6 @@
 import { PAGE } from '../constants/page';
 
-export type pageType = {
+export type PageType = {
     type: string,
     page: number
 }

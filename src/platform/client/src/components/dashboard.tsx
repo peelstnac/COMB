@@ -2,10 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { List, ListRowProps } from 'react-virtualized/dist/commonjs/List';
-
+import { mapState, mapDispatch } from './landing';
 import { connect, ConnectedProps } from 'react-redux';
-import { updateAuth, authType } from '../actions/updateAuth';
-import { switchPage } from '../actions/switchPage';
 var method: string;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
@@ -14,30 +12,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Redux stuff start
-
-interface defaultState {
-    page: number,
-    auth: authType
-}
-
-const mapState = (state: defaultState) => {
-    var { page, auth } = state;
-    return ({
-        page: page,
-        auth: auth
-    });
-}
-
-const mapDispatch = (dispatch: any) => {
-    return ({
-        switchPage: (page: number) => {
-            dispatch(switchPage(page));
-        },
-        updateAuth: (data: authType) => {
-            dispatch(updateAuth(data));
-        }
-    });
-}
 
 const connector = connect(mapState, mapDispatch);
 type DashboardPropType = ConnectedProps<typeof connector>;

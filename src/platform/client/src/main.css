@@ -298,6 +298,7 @@ a:hover, a:focus, a:active {
   height: 100vh;
   width: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

@@ -1,11 +1,11 @@
 import { AUTH } from '../constants/auth';
 
-export interface authType {
+export interface AuthType {
     isAuth: boolean,
     username: string
 }
 
-export const updateAuth = (data: authType) => {
+export const updateAuth = (data: AuthType) => {
     return {
         type: AUTH,
         ...data

@@ -8,7 +8,7 @@ type RegisterStatusCardPropType = {
     }
 };
 
-export const RegisterStatusCard: React.FC<RegisterStatusCardPropType> = (props) => {
+const RegisterStatusCard: React.FC<RegisterStatusCardPropType> = (props) => {
     var state = props.registerStatusCardState;
     if (state.success === false && state.msg.length === 0) {
         return (
@@ -36,3 +36,5 @@ export const RegisterStatusCard: React.FC<RegisterStatusCardPropType> = (props) 
         );
     }
 }
+
+export default RegisterStatusCard;
