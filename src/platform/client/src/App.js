@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // Import components
-import landing from './components/landing';
-import login from './components/login';
-import dashboard from './components/dashboard';
+import { Landing } from './components/landing';
+import { Login } from './components/login';
+import Dashboard from './components/dashboard';
 // Import actions
-import switchPage from './actions/switchPage';
-import updateAuth from './actions/updateAuth';
+import { switchPage } from './actions/switchPage';
+import { updateAuth } from './actions/updateAuth';
 // Import CSS
 import './main.css';
 
@@ -28,20 +28,19 @@ const landingMapDispatchToProps = (dispatch) => {
         }
     });
 }
-const Landing = connect(landingMapStateToProps, landingMapDispatchToProps)(landing);
-const Login = connect(landingMapStateToProps, landingMapDispatchToProps)(login);
-const Dashboard = connect(null, landingMapDispatchToProps)(dashboard);
+const LandingRedux = connect(landingMapStateToProps, landingMapDispatchToProps)(Landing);
+const LoginRedux = connect(landingMapStateToProps, landingMapDispatchToProps)(Login);
 
 class App extends React.Component {
     render() {
         switch (this.props.page) {
             case 1:
                 return (
-                    <Landing />
+                    <LandingRedux />
                 );
             case 2:
                 return (
-                    <Login />
+                    <LoginRedux />
                 );
             case 3:
                 return (
@@ -49,7 +48,7 @@ class App extends React.Component {
                 );
             default:
                 return (
-                    <Landing />
+                    <LandingRedux />
                 );
         }
     }

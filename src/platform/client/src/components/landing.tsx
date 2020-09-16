@@ -1,18 +1,20 @@
 import React from 'react';
+
 // Import assets
 import right_img from './assets/1.png';
 
-// Create landing page with login button
-class Landing extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
+// Import interfaces
+import { pageType } from '../actions/switchPage';
+
+type landingPropsType = {
+    switchPage: (page: number) => pageType;
+}
+
+export const Landing: React.FC<landingPropsType> = (props) => {
     // Switch the page to the login
-    handleClick() {
-        this.props.switchPage(2);
+    const handleClick: () => void = () => {
+        props.switchPage(2);
     }
-    render() {
         return (
             <>
                 <div className="landing-wrapper">
@@ -20,7 +22,7 @@ class Landing extends React.Component {
                         <div className="landing-left-box">
                             <h1 id="landing-title">COMB</h1>
                             <h3 id="landing-subtitle">Packet sniffing made easy.</h3>
-                            <button onClick={this.handleClick} id="landing-login" class="fancy-button bg-gradient1"><span>Join now</span></button>
+                            <button onClick={handleClick} id="landing-login" className="fancy-button bg-gradient1"><span>Join now</span></button>
                         </div>
 
                     </div>
@@ -30,7 +32,4 @@ class Landing extends React.Component {
                 </div>
             </>
         );
-    }
 }
-
-export default Landing;

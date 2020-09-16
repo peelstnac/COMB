@@ -1,6 +1,6 @@
 import React from 'react';
 
-class NotAuthCard extends React.Component {
+export class NotAuthCard extends React.Component {
     render() {
         var notAuthCardState = this.props.notAuthCardState;
         if (notAuthCardState.msg.length === 0) {
@@ -16,5 +16,3 @@ class NotAuthCard extends React.Component {
         }
     }
 }
-
-export default NotAuthCard;

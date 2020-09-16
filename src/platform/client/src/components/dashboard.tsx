@@ -1,17 +1,72 @@
 import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
-import List from 'react-virtualized/dist/commonjs/List';
+import { List, ListRowProps } from 'react-virtualized/dist/commonjs/List';
 
-var method;
+import { connect, ConnectedProps } from 'react-redux';
+import { updateAuth, authType } from '../actions/updateAuth';
+import { switchPage } from '../actions/switchPage';
+var method: string;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
 } else {
     method = 'https://';
 }
 
-class Dashboard extends React.Component {
-    constructor(props) {
+// Redux stuff start
+
+
+
+interface defaultState {
+    page: number,
+    auth: authType
+}
+
+const mapState = (state: defaultState) => {
+    var { page, auth } = state;
+    return ({
+        page: page,
+        auth: auth
+    });
+}
+
+const mapDispatch = () => {
+    return ({
+        switchPage: (page: number) => {
+            switchPage(page);
+        },
+        updateAuth: (data: authType) => {
+            updateAuth(data);
+        }
+    });
+}
+
+const connector = connect(mapState, mapDispatch);
+type dashboardPropType = ConnectedProps<typeof connector>;
+
+// Redux stuff end 
+
+type dashboardStateType = {
+    connectionCode: string,
+    consoleLeft: JSX.Element[],
+    consoleRight: JSX.Element[],
+    autoScrollLeft: string,
+    autoScrollRight: string,
+    consoleHeight: number,
+    consoleWidth: number
+}
+
+class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
+    state: dashboardStateType;
+    cnt: number;
+    cntLeftValue: number;
+    consoleMapper: {
+        [key: number]: number
+    };
+    consoleListLeft: any;
+    consoleListRight: any;
+
+    constructor(props: dashboardPropType) {
         super(props);
         this.state = {
             connectionCode: '',
@@ -49,11 +104,14 @@ class Dashboard extends React.Component {
     componentDidMount() {
         // Get dimensions for the consoles
         // TODO add responsiveness
-        this.setState({
-            // Account for 30px padding
-            consoleHeight: document.getElementById('console-left').clientHeight - 60,
-            consoleWidth: document.getElementById('console-left').clientWidth - 60
-        });
+        var consoleLeft: HTMLElement | null = document.getElementById('console-left');
+        if (consoleLeft !== null) {
+            this.setState({
+                // Account for 30px padding
+                consoleHeight: consoleLeft.clientHeight - 60,
+                consoleWidth: consoleLeft.clientWidth - 60
+            });
+        }
         // Check permissions
         axios.get(method + 'localhost:4000/auth/socket', { withCredentials: true }).then((res) => {
             var { data } = res;
@@ -64,13 +122,12 @@ class Dashboard extends React.Component {
                 const socket = io(method + 'localhost:4000');
                 // Send the secret over
                 socket.emit('secret', data.secret);
-                socket.on('console', (data) => {
+                socket.on('console', (data: string) => {
                     // Parse the data
                     // console.log(data);
                     var arr = data.split(/\r?\n/);
-
-                    var resLeft = [];
-                    var resRight = [];
+                    var resLeft: JSX.Element[] = [];
+                    var resRight: JSX.Element[] = [];
 
                     for (let i = 0; i < arr.length; i++) {
                         let tokens = arr[i].split(' ');
@@ -110,7 +167,7 @@ class Dashboard extends React.Component {
                                 // Right console
                                 resRight.push(<div className="console-right-head tcp-title">
                                     TCP Protocol | {this.cntval()}
-                                </div>); 
+                                </div>);
                                 break;
                             case "1.1":
                                 resLeft.push(<div ><span className="tag">Header length:</span> {tokens[1]}</div>);
@@ -224,10 +281,13 @@ class Dashboard extends React.Component {
                         }
                     }
                     // console.log(res);
-                    this.setState(({ consoleLeft, consoleRight }) => ({
-                        consoleLeft: [...consoleLeft, ...resLeft],
-                        consoleRight: [...consoleRight, ...resRight]
-                    }));
+                    this.setState((state: dashboardStateType) => {
+                        var { consoleLeft, consoleRight } = state;
+                        return ({
+                            consoleLeft: [...consoleLeft, ...resLeft],
+                            consoleRight: [...consoleRight, ...resRight]
+                        })
+                    });
                 });
             }
         });
@@ -242,7 +302,7 @@ class Dashboard extends React.Component {
         }
     }
 
-    renderConsoleRowLeft({ index, key, style }) {
+    renderConsoleRowLeft({ index, key, style }: ListRowProps) {
         return (
             <div key={key} style={style} className="" >
                 {this.state.consoleLeft[index]}
@@ -250,16 +310,16 @@ class Dashboard extends React.Component {
         );
     }
 
-    renderConsoleRowRight({ index, key, style }) {
+    renderConsoleRowRight({ index, key, style }: ListRowProps) {
         return (
-            <div onClick={ () => { this.consoleLeftJump(this.consoleMapper[Math.floor(index/3)+1]); } } key={key} style={style} className="">
+            <div onClick={() => { this.consoleLeftJump(this.consoleMapper[Math.floor(index / 3) + 1]); }} key={key} style={style} className="">
                 {this.state.consoleRight[index]}
             </div>
         );
     }
 
     handleAutoScrollLeft() {
-        this.setState((state) => {
+        this.setState((state: dashboardStateType) => {
             var buttonText = "";
             if (this.state.autoScrollLeft === "Turn off autoscroll") {
                 buttonText = "Turn on autoscroll";
@@ -273,7 +333,7 @@ class Dashboard extends React.Component {
     }
 
     handleAutoScrollRight() {
-        this.setState((state) => {
+        this.setState((state: dashboardStateType) => {
             var buttonText = "";
             if (this.state.autoScrollRight === "Turn off autoscroll") {
                 buttonText = "Turn on autoscroll";
@@ -286,7 +346,7 @@ class Dashboard extends React.Component {
         });
     }
 
-    consoleLeftJump(to) {
+    consoleLeftJump(to: number) {
         // Turn off auto scrolling for left
         if (this.state.autoScrollLeft === "Turn off autoscroll") {
             this.handleAutoScrollLeft();
@@ -373,4 +433,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard;
+export default connector(Dashboard);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RegisterStatusCard extends React.Component {
+export class RegisterStatusCard extends React.Component {
     render() {
         var state = this.props.registerStatusCardState;
         if (state.success === false && state.msg.length === 0) {
@@ -30,5 +30,3 @@ class RegisterStatusCard extends React.Component {
         }
     }
 }
-
-export default RegisterStatusCard;

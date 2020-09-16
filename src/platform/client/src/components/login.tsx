@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 // Import components
-import NotAuthCard from './notAuthCard';
-import RegisterStatusCard from './registerStatusCard';
+import { NotAuthCard } from './notAuthCard';
+import { RegisterStatusCard } from './registerStatusCard';
 // Configure HTTP vs HTTPS
-var method;
+var method: string;
 if (process.env.NODE_ENV === 'development') {
     method = 'http://';
 } else {
     method = 'https://';
 }
 
-class Login extends React.Component {
-    constructor(props) {
+export class Login extends React.Component<any, any> {
+    constructor(props: any) {
         super(props);
         this.state = {
             formUsername: '',
@@ -38,12 +38,12 @@ class Login extends React.Component {
         this.props.switchPage(1);
     }
     // Set local state to input values
-    handleUsernameChange(event) {
+    handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             formUsername: event.target.value
         });
     }
-    handlePasswordChange(event) {
+    handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             formPassword: event.target.value
         });
@@ -160,5 +160,3 @@ class Login extends React.Component {
         );
     }
 }
-
-export default Login;
