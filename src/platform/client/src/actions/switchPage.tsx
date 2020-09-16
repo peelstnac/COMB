@@ -5,7 +5,7 @@ export type pageType = {
     page: number
 }
 
-export const switchPage: (page: number) => pageType = (page) => {
+export const switchPage = (page: number) => {
     return ({
         type: PAGE,
         page: page

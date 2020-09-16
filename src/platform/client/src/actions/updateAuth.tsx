@@ -1,6 +1,6 @@
 import { AUTH } from '../constants/auth';
 
-export type authType = {
+export interface authType {
     isAuth: boolean,
     username: string
 }

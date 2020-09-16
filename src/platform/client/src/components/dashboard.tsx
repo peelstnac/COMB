@@ -15,8 +15,6 @@ if (process.env.NODE_ENV === 'development') {
 
 // Redux stuff start
 
-
-
 interface defaultState {
     page: number,
     auth: authType
@@ -30,23 +28,23 @@ const mapState = (state: defaultState) => {
     });
 }
 
-const mapDispatch = () => {
+const mapDispatch = (dispatch: any) => {
     return ({
         switchPage: (page: number) => {
-            switchPage(page);
+            dispatch(switchPage(page));
         },
         updateAuth: (data: authType) => {
-            updateAuth(data);
+            dispatch(updateAuth(data));
         }
     });
 }
 
 const connector = connect(mapState, mapDispatch);
-type dashboardPropType = ConnectedProps<typeof connector>;
+type DashboardPropType = ConnectedProps<typeof connector>;
 
 // Redux stuff end 
 
-type dashboardStateType = {
+type DashboardStateType = {
     connectionCode: string,
     consoleLeft: JSX.Element[],
     consoleRight: JSX.Element[],
@@ -56,8 +54,8 @@ type dashboardStateType = {
     consoleWidth: number
 }
 
-class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
-    state: dashboardStateType;
+class Dashboard extends React.Component<DashboardPropType, DashboardStateType> {
+    state: DashboardStateType;
     cnt: number;
     cntLeftValue: number;
     consoleMapper: {
@@ -66,7 +64,7 @@ class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
     consoleListLeft: any;
     consoleListRight: any;
 
-    constructor(props: dashboardPropType) {
+    constructor(props: DashboardPropType) {
         super(props);
         this.state = {
             connectionCode: '',
@@ -281,7 +279,7 @@ class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
                         }
                     }
                     // console.log(res);
-                    this.setState((state: dashboardStateType) => {
+                    this.setState((state: DashboardStateType) => {
                         var { consoleLeft, consoleRight } = state;
                         return ({
                             consoleLeft: [...consoleLeft, ...resLeft],
@@ -319,7 +317,7 @@ class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
     }
 
     handleAutoScrollLeft() {
-        this.setState((state: dashboardStateType) => {
+        this.setState((state: DashboardStateType) => {
             var buttonText = "";
             if (this.state.autoScrollLeft === "Turn off autoscroll") {
                 buttonText = "Turn on autoscroll";
@@ -333,7 +331,7 @@ class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
     }
 
     handleAutoScrollRight() {
-        this.setState((state: dashboardStateType) => {
+        this.setState((state: DashboardStateType) => {
             var buttonText = "";
             if (this.state.autoScrollRight === "Turn off autoscroll") {
                 buttonText = "Turn on autoscroll";
@@ -364,7 +362,6 @@ class Dashboard extends React.Component<dashboardPropType, dashboardStateType> {
         Promise.resolve(p).then((res) => {
             this.props.switchPage(1);
         });
-        console.log("EEEE");
     }
 
     // Console counter to map right to left

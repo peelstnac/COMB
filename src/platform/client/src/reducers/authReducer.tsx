@@ -1,11 +1,16 @@
 import { AUTH } from '../constants/auth';
+import { authType } from '../actions/updateAuth';
+
+interface actionType extends authType {
+    type: string
+}
 
 const defaultState = {
     isAuth: false,
     username: ''
 };
 
-const authReducer = (state = defaultState, action) => {
+const authReducer = (state = defaultState, action: actionType) => {
     switch (action.type) {
         case AUTH:
             return {
